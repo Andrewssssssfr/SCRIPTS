@@ -1,30 +1,31 @@
 --Made By Bolts And The3Bakers and tysm to Andrew for undetection once again!
+local ping = 32 
+spawn(function()
+while wait(0.15) do
+    wait(0.15)
+    ping = math.random(10, 15)end end)
+spawn(function()
+    game:GetService("RunService").RenderStepped:connect(function()game.Players.LocalPlayer.Ping.Value = ping end)while wait(0.1) do local args = {
+[1] = 500,
+[2] = "LOL"
+}
+game:GetService("ReplicatedStorage").Events.UpdatePing:FireServer(unpack(args))end
+end)
 Library=loadstring(game:HttpGet("https://pastebin.com/raw/bfSMHFwJ"))()
 Client = {
     Modules = {ClientEnvoirment,ClientMain,},
-    Toggles = { WallBang = false, },
-    Values = {
-        ChatMsg = 'Bolts Ware v9 On Top',
-    }
+    Toggles = { WallBang = false, WallbangV2 = false,},
+    Values = {ChatMsg = 'Bolts Ware v9 On Top',}
 }
-Config = {
-    Infammo = false,
-    Automtatic = false,
-    FireRate = false,
-    NoRecoil = false,
-    NoSpread = false
-}
+Config = {Infammo = false,Automtatic = false,FireRate = false,NoRecoil = false,NoSpread = false}
 local mt = getrawmetatable(game)
-local namecallold = mt.__namecall
 local index = mt.__index
 setreadonly(mt, false)
-mt.__namecall = newcclosure(function(self, ...)
-    local Args = {...}
-    NamecallMethod = getnamecallmethod()
-    if tostring(NamecallMethod) == "FindPartOnRayWithIgnoreList" and Client.Toggles.WallBang then
-        table.insert(Args[2], workspace.Map)
+mt.__index = newcclosure(function(self, K)
+    if K == "Clips" and Client.Toggles.WallbangV2 then
+        return workspace.Map
     end
-    return namecallold(self, ...)
+    return index(self, K)
 end)
 setreadonly(mt, true)
 local ArsoniaTable={
@@ -78,8 +79,6 @@ local ArsoniaTable={
             Bunnyhopspeed=0,
             BunnyhopType="Legit",
             Removecrouchspeed=false,
-            Forcedoublejump=false,
-            Infdoublejump=false,
             Autoairstrafe=false,
             Autotakecontrol=false,
             Anticrouchjumplock=false,
@@ -313,7 +312,7 @@ local CombatTab=Window:Tab("Combat")
 local CombatTabMainSection=CombatTab:Section("Aimbot")
 CombatTabMainSection:Toggle("Kill All(Buggy)",function(state)
     if state then
-                game:GetService("ReplicatedStorage").wkspc.Status.RoundOver.Value = false
+        game:GetService("ReplicatedStorage").wkspc.Status.RoundOver.Value = false
 local Farming = false
 local TimeLeft = 30
 local TurnBack = 4
@@ -327,7 +326,7 @@ function StartAutofarm()
 	spawn(function()
 		repeat
 			if game:GetService("Players").LocalPlayer.Status.Team.Value ~= "Spectator" then
-				for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+				for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 					if v ~= game:GetService("Players").LocalPlayer then
 						if v.Character then
 							if v.NRPBS.Health.Value > 0 then
@@ -385,9 +384,9 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	if game:GetService("Players").LocalPlayer.NRPBS.Health.Value <= 0 then PlayerLocked = nil end
 end)
 StartAutofarm()
-for i,v in next, game.ReplicatedStorage.Weapons:GetChildren() do
-for i,c in next, v:GetChildren() do 
-for i,x in next, getconnections(c.Changed) do
+for _,v in next, game.ReplicatedStorage.Weapons:GetChildren() do
+for _,c in next, v:GetChildren() do 
+for _,x in next, getconnections(c.Changed) do
 x:Disable()
 end
 end
@@ -404,7 +403,7 @@ function closestplayer()
     local dist = math.huge
     local target = nil
     local localplayer = game.Players.LocalPlayer
-	for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+	for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 		if v ~= localplayer then
 			if v.Character and v.Character:FindFirstChild("Head") and v.TeamColor ~= localplayer.TeamColor and _G.aimbot and v.Character.Humanoid.Health > 0 then --- creating the checks
     			local magnitude = (v.Character.Head.Position - localplayer.Character.Head.Position).magnitude
@@ -417,19 +416,15 @@ function closestplayer()
     end
     return target
 end
-local settings = {
-	keybind = Enum.UserInputType.MouseButton2
-}
 local UIS = game:GetService("UserInputService")
 local aiming = false
-
 UIS.InputBegan:Connect(function(inp)
-	if inp.UserInputType == settings.keybind then
+	if inp.UserInputType == Enum.UserInputType.MouseButton2 then
 		aiming = true
 	end
 end)
 UIS.InputEnded:Connect(function(inp)
-	if inp.UserInputType == settings.keybind then
+	if inp.UserInputType == Enum.UserInputType.MouseButton2 then
 		aiming = false
 	end
 end)
@@ -445,20 +440,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	end
 end)
 end)
-CombatTabMainSection:Toggle("Wallbang Bypass V3",function(state)
-    getgenv().wallbangbypassv3 = state
-    Client.Toggles.WallBang = state
-    local ping = 32 
-spawn(function()
-    while getgenv().wallbangbypassv3 do
-        wait(0.15)
-        ping = math.random(10, 20)end end)
-    spawn(function()
-        game:GetService("RunService").RenderStepped:connect(function()game.Players.LocalPlayer.Ping.Value = ping end)end)while wait(0.1) do local args = {
-    [1] = 500,
-    [2] = "LOL"
-}
-game:GetService("ReplicatedStorage").Events.UpdatePing:FireServer(unpack(args))end
+CombatTabMainSection:Toggle("Wallbang Bypass V3 (Clips)",function(state)
+    Client.Toggles.WallbangV2 = state
 end)
 CombatTabMainSection:Toggle("Triggerbot (Toggle Slient Aim To Work)",function(x)
     if x then
@@ -493,7 +476,7 @@ CombatTabGunmodsSection:Toggle("Enable Gun Mods",function(x)
             if v:FindFirstChild("StoredAmmo")then
                 v.ArsoniaStoredAmmo.Value=math.clamp(v.StoredAmmo.Value+ArsoniaTable.Combat.Gunmods.Storedammo,0,199)
             end
-            if v:FindFirstChild("Range")and v:FindFirstChild("Melee")and v:FindFirstChild("Backstab")then
+            if v:FindFirstChild("Range") and v:FindFirstChild("Melee")and v:FindFirstChild("Backstab")then
                 v.Range.Value=ArsoniaTable.Combat.Gunmods.Kniferange
             end
             if ArsoniaTable.Combat.Gunmods.Instantreload then
@@ -562,9 +545,9 @@ Config.FireRate = state
 for _, v in pairs(game.ReplicatedStorage.Weapons:GetDescendants()) do
     if v.Name == "FireRate" then
         if Config.FireRate then
-            v.Value = 0.02 -- Fast Firerate
+            v.Value = 0.02
         else
-            return -- v.Value = 0.8
+            return
         end
     end
 end
@@ -664,13 +647,10 @@ CombatTabGunmodsSection:Toggle("Remove Gun Bob",function(x)
 end)
 CombatTabGunmodsSection:Toggle("No Recoil",function(state)
 Config.NoRecoil = state
-for i, v in pairs(game:GetService("ReplicatedStorage").Weapons:GetDescendants()) do
+for _, v in pairs(game:GetService("ReplicatedStorage").Weapons:GetDescendants()) do
     if v.Name == "RecoilControl" or v.Name == "Recoil" then
-        if Config.NoRecoil then
-            v.Value = 0 
-        else
-            v.Value = 1
-        end
+        if Config.NoRecoil then v.Value = 0 
+        else v.Value = 1 end
     end
 end
 end)
@@ -678,11 +658,8 @@ CombatTabGunmodsSection:Toggle("No Spread",function(state)
 Config.NoSpread = state
 for i, v in pairs(game:GetService("ReplicatedStorage").Weapons:GetDescendants()) do
     if v.Name == "MaxSpread" or v.Name == "Spread" or v.Name == "SpreadControl" then
-        if Config.NoSpread then
-            v.Value = 0 
-        else
-            v.Value = 1
-        end
+        if Config.NoSpread then v.Value = 0 
+        else v.Value = 1 end
     end
 end
 end)
@@ -763,11 +740,9 @@ end)
 PlayerTabAntiAimSection:Button("Remove Legs",function()
     ArsoniaTable.Player.Anti_Aim.IsLegs=true
 end)
-local Noclipping = nil
-local Clip = nil
+local Noclipping, Clip = nil
 function noclip()
-	Clip = false
-	wait(0.1)
+	Clip = false wait(0.1)
 	local function NoclipLoop()
 		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
 			for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
@@ -861,8 +836,19 @@ PlayerTabMovementSection:ToggleSlider("Walkspeed",1,250,16,function(x,y)
     ArsoniaTable.Player.Movement.Walk=x
     ArsoniaTable.Player.Movement.Walkspeed=y
 end)
+_G.infinjump = false
+local Player = game:GetService("Players").LocalPlayer
+local Mouse = Player:GetMouse()
+Mouse.KeyDown:connect(function(k)
+	if _G.infinjump then
+        if k:byte() == 32 then
+            Humanoid = game:GetService("Players").LocalPlayer:FindFirstChild('Character'):FindFirstChildOfClass("Humanoid")
+            Humanoid:ChangeState("Jumping")
+        end
+	end
+end)
 PlayerTabMovementSection:Toggle("Infinite Jump",function(x)
-    Client.Toggles.InfJump = x
+    _G.infinjump = x
 end)
 PlayerTabMovementSection:ToggleSlider("Bunny Hop",1,5,1,function(x,y)
     ArsoniaTable.Player.Movement.Bunnyhop=x
@@ -933,15 +919,8 @@ PlayerTabMiscSection:Slider("Uncrouch Animation Speed",-100,100,60,function(x)
 end)
 local Config = {
     Visuals = {
-        BoxEsp = false,
-        TracerEsp = false,
-        TracersOrigin = "Bottom", 
-        NameEsp = false,
-        DistanceEsp = false,
         SkeletonEsp = false,
-        EnemyColor = Color3.fromRGB(255, 0, 0),
-        TeamColor = Color3.fromRGB(0, 255, 0),
-        MurdererColor = Color3.fromRGB(255, 0, 0)
+		EnemyColor = Color3.fromRGB(255,0,0),
     }
 }
 local Funcs = {}
@@ -955,27 +934,11 @@ end
 function Funcs:Round(number)
     return math.floor(tonumber(number) + 0.5)
 end
-function Funcs:DrawSquare()
-    local Box = Drawing.new("Square")
-    Box.Color = Color3.fromRGB(190, 190, 0)
-    Box.Thickness = 1.4
-    Box.Filled = false
-    Box.Transparency = 1
-    return Box
-end
 function Funcs:DrawLine()
     local line = Drawing.new("Line")
     line.Color = Color3.new(190, 190, 0)
     line.Thickness = 1.5
     return line
-end
-function Funcs:DrawText()
-    local text = Drawing.new("Text")
-    text.Color = Color3.fromRGB(190, 190, 0)
-    text.Size = 19
-    text.Outline = true
-    text.Center = true
-    return text
 end
 local Services =
     setmetatable(
@@ -990,10 +953,6 @@ local Services =
     }
 )
 function Funcs:AddEsp(player)
-    local Box = Funcs:DrawSquare()
-    local Tracer = Funcs:DrawLine()
-    local Name = Funcs:DrawText()
-    local Distance = Funcs:DrawText()
     local SnapLines = Funcs:DrawLine()
     local HeadLowerTorso = Funcs:DrawLine()
     local NeckLeftUpper = Funcs:DrawLine()
@@ -1015,77 +974,6 @@ function Funcs:AddEsp(player)
                     Services.Camera:WorldToViewportPoint(
                     player.Character.HumanoidRootPart.Position - Vector3.new(0, 4, 0)
                 )
-                if Config.Visuals.BoxEsp then
-                    Box.Visible = OnScreen
-                    Box.Size = Vector2.new((2350 / RootPosition.Z) + 2.5, HeadPosition.Y - LegPosition.Y)
-                    Box.Position = Vector2.new((RootPosition.X - Box.Size.X / 2) - 1, RootPosition.Y - Box.Size.Y / 2)
-                else
-                    Box.Visible = false
-                end
-                if Config.Visuals.TracerEsp then
-                    Tracer.Visible = OnScreen
-                    if Config.Visuals.TracersOrigin == "Top" then
-                        Tracer.To = Vector2.new(Services.Camera.ViewportSize.X / 2, 0)
-                        Tracer.From =
-                            Vector2.new(
-                            Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position).X - 1,
-                            RootPosition.Y + (HeadPosition.Y - LegPosition.Y) / 2
-                        )
-                    elseif Config.Visuals.TracersOrigin == "Middle" then
-                        Tracer.To = Vector2.new(Services.Camera.ViewportSize.X / 2, Services.Camera.ViewportSize.Y / 2)
-                        Tracer.From =
-                            Vector2.new(
-                            Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position).X - 1,
-                            (RootPosition.Y + (HeadPosition.Y - LegPosition.Y) / 2) -
-                                ((HeadPosition.Y - LegPosition.Y) / 2)
-                        )
-                    elseif Config.Visuals.TracersOrigin == "Bottom" then
-                        Tracer.To = Vector2.new(Services.Camera.ViewportSize.X / 2, 1000)
-                        Tracer.From =
-                            Vector2.new(
-                            Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position).X - 1,
-                            RootPosition.Y - (HeadPosition.Y - LegPosition.Y) / 2
-                        )
-                    elseif Config.Visuals.TracersOrigin == "Mouse" then
-                        Tracer.To = game:GetService("UserInputService"):GetMouseLocation()
-                        Tracer.From =
-                            Vector2.new(
-                            Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position).X - 1,
-                            (RootPosition.Y + (HeadPosition.Y - LegPosition.Y) / 2) -
-                                ((HeadPosition.Y - LegPosition.Y) / 2)
-                        )
-                    end
-                else
-                    Tracer.Visible = false
-                end
-                if Config.Visuals.NameEsp then
-                    Name.Visible = OnScreen
-                    Name.Position =
-                        Vector2.new(
-                        Services.Camera:WorldToViewportPoint(player.Character.Head.Position).X,
-                        Services.Camera:WorldToViewportPoint(player.Character.Head.Position).Y - 40
-                    )
-                    Name.Text = "[ " .. player.Name .. " ]"
-                else
-                    Name.Visible = false
-                end
-                if Config.Visuals.DistanceEsp and player.Character:FindFirstChild("Head") then
-                    Distance.Visible = OnScreen
-                    Distance.Position =
-                        Vector2.new(
-                        Services.Camera:WorldToViewportPoint(player.Character.Head.Position).X,
-                        Services.Camera:WorldToViewportPoint(player.Character.Head.Position).Y - 25
-                    )
-                    Distance.Text =
-                        "[ " ..
-                        Funcs:Round(
-                            (game:GetService("Players").LocalPlayer.Character.Head.Position -
-                                player.Character.Head.Position).Magnitude
-                        ) ..
-                            " Studs ]"
-                else
-                    Distance.Visible = false
-                end
                 if Config.Visuals.SkeletonEsp then
                     HeadLowerTorso.Visible = OnScreen
                     HeadLowerTorso.From =
@@ -1204,10 +1092,6 @@ function Funcs:AddEsp(player)
                     RightLowerRightUpper.Visible = false
                 end
                 if game.Players.LocalPlayer.TeamColor ~= player.TeamColor then
-                    Box.Color = Config.Visuals.EnemyColor
-                    Tracer.Color = Config.Visuals.EnemyColor
-                    Name.Color = Config.Visuals.EnemyColor
-                    Distance.Color = Config.Visuals.EnemyColor
                     HeadLowerTorso.Color = Config.Visuals.EnemyColor
                     NeckLeftUpper.Color = Config.Visuals.EnemyColor
                     LeftUpperLeftLower.Color = Config.Visuals.EnemyColor
@@ -1218,25 +1102,17 @@ function Funcs:AddEsp(player)
                     LowerTorsoRightUpper.Color = Config.Visuals.EnemyColor
                     RightLowerRightUpper.Color = Config.Visuals.EnemyColor
                 else
-                    Box.Color = Config.Visuals.TeamColor
-                    Tracer.Color = Config.Visuals.TeamColor
-                    Name.Color = Config.Visuals.TeamColor
-                    Distance.Color = Config.Visuals.TeamColor
-                    HeadLowerTorso.Color = Config.Visuals.TeamColor
-                    NeckLeftUpper.Color = Config.Visuals.TeamColor
-                    LeftUpperLeftLower.Color = Config.Visuals.TeamColor
-                    NeckRightUpper.Color = Config.Visuals.TeamColor
-                    RightUpperLeftLower.Color = Config.Visuals.TeamColor
-                    LowerTorsoLeftUpper.Color = Config.Visuals.TeamColor
-                    LeftLowerLeftUpper.Color = Config.Visuals.TeamColor
-                    LowerTorsoRightUpper.Color = Config.Visuals.TeamColor
-                    RightLowerRightUpper.Color = Config.Visuals.TeamColor
+					HeadLowerTorso.Visible = false
+                    NeckLeftUpper.Visible = false
+                    LeftUpperLeftLower.Visible = false
+                    NeckRightUpper.Visible = false
+                    RightUpperLeftLower.Visible = false
+                    LowerTorsoLeftUpper.Visible = false
+                    LeftLowerLeftUpper.Visible = false
+                    LowerTorsoRightUpper.Visible = false
+                    RightLowerRightUpper.Visible = false
                 end
             else
-                Box.Visible = false
-                Tracer.Visible = false
-                Name.Visible = false
-                Distance.Visible = false
                 HeadLowerTorso.Visible = false
                 NeckLeftUpper.Visible = false
                 LeftUpperLeftLower.Visible = false
@@ -1250,7 +1126,7 @@ function Funcs:AddEsp(player)
         end
     )
 end
-for i, v in pairs(Services.Players:GetPlayers()) do
+for _, v in pairs(Services.Players:GetPlayers()) do
     if v ~= Services.LocalPlayer then
         Funcs:AddEsp(v)
     end
@@ -1288,315 +1164,12 @@ end)
 VisualsTabESPSection:Toggle("Health",function(x)
     ArsoniaTable.Visuals.ESP.Health=x
 end)
-VisualsTabESPSection:Toggle("3D Box ESP (Cant Change Color)",function(state)
-        on = state
-        if on == true then 
-        local workspace = game:GetService("Workspace")
-        local player = game:GetService("Players").LocalPlayer
-        local camera = workspace.CurrentCamera
-        
-        local Box_Color = Color3.fromRGB(255, 0, 0)
-        local Box_Thickness = 2
-        local Box_Transparency = 1
-        
-        local Tracers = false
-        local Tracer_Color = Color3.fromRGB(255, 0, 0)
-        local Tracer_Thickness = 2
-        local Tracer_Transparency = 1
-        
-        local Autothickness = false
-        
-        local Team_Check = true
-        local red = Color3.fromRGB(227, 52, 52)
-        local green = Color3.fromRGB(88, 217, 24)
-        
-        local function NewLine()
-            local line = Drawing.new("Line")
-            line.Visible = false
-            line.From = Vector2.new(0, 0)
-            line.To = Vector2.new(1, 1)
-            line.Color = Box_Color
-            line.Thickness = Box_Thickness
-            line.Transparency = Box_Transparency
-            return line
-        end
-        
-        for i, v in pairs(game.Players:GetChildren()) do
-            local lines = {
-                line1 = NewLine(),
-                line2 = NewLine(),
-                line3 = NewLine(),
-                line4 = NewLine(),
-                line5 = NewLine(),
-                line6 = NewLine(),
-                line7 = NewLine(),
-                line8 = NewLine(),
-                line9 = NewLine(),
-                line10 = NewLine(),
-                line11 = NewLine(),
-                line12 = NewLine(),
-                Tracer = NewLine()
-            }
-        
-            lines.Tracer.Color = Tracer_Color
-            lines.Tracer.Thickness = Tracer_Thickness
-            lines.Tracer.Transparency = Tracer_Transparency
-    
-            local function ESP()
-                local connection
-                connection = game:GetService("RunService").RenderStepped:Connect(function()
-                    if on and v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v.Name ~= player.Name and v.Character.Humanoid.Health > 0 and v.Character:FindFirstChild("Head") ~= nil then
-                        local pos, vis = camera:WorldToViewportPoint(v.Character.HumanoidRootPart.Position)
-                        if vis then
-                            local Scale = v.Character.Head.Size.Y/2
-                            local Size = Vector3.new(2, 3, 1.5) * (Scale * 2)
-        
-                            local Top1 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, -Size.Z)).p)
-                            local Top2 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, Size.Z)).p)
-                            local Top3 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, Size.Z)).p)
-                            local Top4 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, -Size.Z)).p)
-        
-                            local Bottom1 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, -Size.Z)).p)
-                            local Bottom2 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, Size.Z)).p)
-                            local Bottom3 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, Size.Z)).p)
-                            local Bottom4 = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, -Size.Z)).p)
-        
-                            lines.line1.From = Vector2.new(Top1.X, Top1.Y)
-                            lines.line1.To = Vector2.new(Top2.X, Top2.Y)
-        
-                            lines.line2.From = Vector2.new(Top2.X, Top2.Y)
-                            lines.line2.To = Vector2.new(Top3.X, Top3.Y)
-        
-                            lines.line3.From = Vector2.new(Top3.X, Top3.Y)
-                            lines.line3.To = Vector2.new(Top4.X, Top4.Y)
-        
-                            lines.line4.From = Vector2.new(Top4.X, Top4.Y)
-                            lines.line4.To = Vector2.new(Top1.X, Top1.Y)
-        
-                            lines.line5.From = Vector2.new(Bottom1.X, Bottom1.Y)
-                            lines.line5.To = Vector2.new(Bottom2.X, Bottom2.Y)
-        
-                            lines.line6.From = Vector2.new(Bottom2.X, Bottom2.Y)
-                            lines.line6.To = Vector2.new(Bottom3.X, Bottom3.Y)
-        
-                            lines.line7.From = Vector2.new(Bottom3.X, Bottom3.Y)
-                            lines.line7.To = Vector2.new(Bottom4.X, Bottom4.Y)
-        
-                            lines.line8.From = Vector2.new(Bottom4.X, Bottom4.Y)
-                            lines.line8.To = Vector2.new(Bottom1.X, Bottom1.Y)
-        
-                            lines.line9.From = Vector2.new(Bottom1.X, Bottom1.Y)
-                            lines.line9.To = Vector2.new(Top1.X, Top1.Y)
-        
-                            lines.line10.From = Vector2.new(Bottom2.X, Bottom2.Y)
-                            lines.line10.To = Vector2.new(Top2.X, Top2.Y)
-        
-                            lines.line11.From = Vector2.new(Bottom3.X, Bottom3.Y)
-                            lines.line11.To = Vector2.new(Top3.X, Top3.Y)
-        
-                            lines.line12.From = Vector2.new(Bottom4.X, Bottom4.Y)
-                            lines.line12.To = Vector2.new(Top4.X, Top4.Y)
-        
-                            if Tracers then
-                                local trace = camera:WorldToViewportPoint((v.Character.HumanoidRootPart.CFrame * CFrame.new(0, -Size.Y, 0)).p)
-        
-                                lines.Tracer.From = Vector2.new(camera.ViewportSize.X/2, camera.ViewportSize.Y)
-                                lines.Tracer.To = Vector2.new(trace.X, trace.Y)
-                            end
-        
-                            if Team_Check then
-                                if v.TeamColor == player.TeamColor then
-                                    for u, x in pairs(lines) do
-                                        x.Color = green
-                                    end
-                                else 
-                                    for u, x in pairs(lines) do
-                                        x.Color = red
-                                    end
-                                end
-                            end
-        
-                            if Autothickness then
-                                local distance = (player.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).magnitude
-                                local value = math.clamp(1/distance*100, 0.1, 4) --0.1 is min thickness, 6 is max
-                                for u, x in pairs(lines) do
-                                    x.Thickness = value
-                                end
-                            else 
-                                for u, x in pairs(lines) do
-                                    x.Thickness = Box_Thickness
-                                end
-                            end
-        
-                            for u, x in pairs(lines) do
-                                if x ~= lines.Tracer then
-                                    x.Visible = true
-                                end
-                            end
-                            if Tracers then
-                                lines.Tracer.Visible = true
-                            end
-                        else 
-                            for u, x in pairs(lines) do
-                                x.Visible = false
-                            end
-                        end
-                    else 
-                        for u, x in pairs(lines) do
-                            x.Visible = false
-                        end
-                        if game.Players:FindFirstChild(v.Name) == nil then
-                            connection:Disconnect()
-                        end
-                    end
-                end)
-            end
-            coroutine.wrap(ESP)()
-        end
-        
-        game.Players.PlayerAdded:Connect(function(newplr)
-            local lines = {
-                line1 = NewLine(),
-                line2 = NewLine(),
-                line3 = NewLine(),
-                line4 = NewLine(),
-                line5 = NewLine(),
-                line6 = NewLine(),
-                line7 = NewLine(),
-                line8 = NewLine(),
-                line9 = NewLine(),
-                line10 = NewLine(),
-                line11 = NewLine(),
-                line12 = NewLine(),
-                Tracer = NewLine()
-            }
-        
-            lines.Tracer.Color = Tracer_Color
-            lines.Tracer.Thickness = Tracer_Thickness
-            lines.Tracer.Transparency = Tracer_Transparency
-        
-            local function ESP()
-                local connection
-                connection = game:GetService("RunService").RenderStepped:Connect(function()
-                    if on and newplr.Character ~= nil and newplr.Character:FindFirstChild("Humanoid") ~= nil and newplr.Character:FindFirstChild("HumanoidRootPart") ~= nil and newplr.Name ~= player.Name and newplr.Character.Humanoid.Health > 0 and newplr.Character:FindFirstChild("Head") ~= nil then
-                        local pos, vis = camera:WorldToViewportPoint(newplr.Character.HumanoidRootPart.Position)
-                        if vis then
-                            local Scale = newplr.Character.Head.Size.Y/2
-                            local Size = Vector3.new(2, 3, 1.5) * (Scale * 2) -- Change this for different box size
-        
-                            local Top1 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, -Size.Z)).p)
-                            local Top2 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, Size.Y, Size.Z)).p)
-                            local Top3 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, Size.Z)).p)
-                            local Top4 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, Size.Y, -Size.Z)).p)
-        
-                            local Bottom1 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, -Size.Z)).p)
-                            local Bottom2 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(-Size.X, -Size.Y, Size.Z)).p)
-                            local Bottom3 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, Size.Z)).p)
-                            local Bottom4 = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(Size.X, -Size.Y, -Size.Z)).p)
-        
-                            lines.line1.From = Vector2.new(Top1.X, Top1.Y)
-                            lines.line1.To = Vector2.new(Top2.X, Top2.Y)
-        
-                            lines.line2.From = Vector2.new(Top2.X, Top2.Y)
-                            lines.line2.To = Vector2.new(Top3.X, Top3.Y)
-        
-                            lines.line3.From = Vector2.new(Top3.X, Top3.Y)
-                            lines.line3.To = Vector2.new(Top4.X, Top4.Y)
-        
-                            lines.line4.From = Vector2.new(Top4.X, Top4.Y)
-                            lines.line4.To = Vector2.new(Top1.X, Top1.Y)
-        
-                            lines.line5.From = Vector2.new(Bottom1.X, Bottom1.Y)
-                            lines.line5.To = Vector2.new(Bottom2.X, Bottom2.Y)
-        
-                            lines.line6.From = Vector2.new(Bottom2.X, Bottom2.Y)
-                            lines.line6.To = Vector2.new(Bottom3.X, Bottom3.Y)
-        
-                            lines.line7.From = Vector2.new(Bottom3.X, Bottom3.Y)
-                            lines.line7.To = Vector2.new(Bottom4.X, Bottom4.Y)
-        
-                            lines.line8.From = Vector2.new(Bottom4.X, Bottom4.Y)
-                            lines.line8.To = Vector2.new(Bottom1.X, Bottom1.Y)
-        
-                            lines.line9.From = Vector2.new(Bottom1.X, Bottom1.Y)
-                            lines.line9.To = Vector2.new(Top1.X, Top1.Y)
-        
-                            lines.line10.From = Vector2.new(Bottom2.X, Bottom2.Y)
-                            lines.line10.To = Vector2.new(Top2.X, Top2.Y)
-        
-                            lines.line11.From = Vector2.new(Bottom3.X, Bottom3.Y)
-                            lines.line11.To = Vector2.new(Top3.X, Top3.Y)
-        
-                            lines.line12.From = Vector2.new(Bottom4.X, Bottom4.Y)
-                            lines.line12.To = Vector2.new(Top4.X, Top4.Y)
-        
-                            if Tracers then
-                                local trace = camera:WorldToViewportPoint((newplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -Size.Y, 0)).p)
-                                lines.Tracer.From = Vector2.new(camera.ViewportSize.X/2, camera.ViewportSize.Y)
-                                lines.Tracer.To = Vector2.new(trace.X, trace.Y)
-                            end
-        
-                            if Team_Check then
-                                if newplr.TeamColor == player.TeamColor then
-                                    for u, x in pairs(lines) do
-                                        x.Color = green
-                                    end
-                                else 
-                                    for u, x in pairs(lines) do
-                                        x.Color = red
-                                    end
-                                end
-                            end
-        
-                            if Autothickness then
-                                local distance = (player.Character.HumanoidRootPart.Position - newplr.Character.HumanoidRootPart.Position).magnitude
-                                local value = math.clamp(1/distance*100, 0.1, 4) --0.1 is min thickness, 6 is max
-                                for u, x in pairs(lines) do
-                                    x.Thickness = value
-                                end
-                            else 
-                                for u, x in pairs(lines) do
-                                    x.Thickness = Box_Thickness
-                                end
-                            end
-        
-                            for u, x in pairs(lines) do
-                                if x ~= lines.Tracer then
-                                    x.Visible = true
-                                end
-                            end
-                            if Tracers then
-                                lines.Tracer.Visible = true
-                            end
-                        else 
-                            for u, x in pairs(lines) do
-                                x.Visible = false
-                            end
-                        end
-                    else 
-                        for u, x in pairs(lines) do
-                            x.Visible = false
-                        end
-                        if game.Players:FindFirstChild(newplr.Name) == nil then
-                            connection:Disconnect()
-                        end
-                    end
-                end)
-            end
-            coroutine.wrap(ESP)()
-        end)
-        end
-end)
 VisualsTabESPSection:Color("Every Thing Else",Color3.fromRGB(196, 0, 255),function(x)
     ArsoniaTable.Visuals.ESP.Color=x
 end)
-VisualsTabESPSection:Color("Skeleton Team Color",Color3.new(0, 255, 0),function(Color)
-		Config.Visuals.TeamColor = Color
-	end)
-VisualsTabESPSection:Color("Skeleton Enemy Color",Color3.new(255, 0, 0),function(Color)
-		Config.Visuals.EnemyColor = Color
+VisualsTabESPSection:Color("Skeleton Color",Color3.new(255, 0, 0),function(Color)
+	Config.Visuals.EnemyColor = Color
 end)
-
 local VisualsTabViewmodelSection=VisualsTab:Section("Viewmodel")
 VisualsTabViewmodelSection:Toggle("Enable Viewmodel",function(x)
     ArsoniaTable.Visuals.Viewmodel.Enabled=x
@@ -1635,7 +1208,6 @@ VisualsTabViewmodelSection:Color("Color",Color3.fromRGB(196, 0, 255),function(x)
         end
     end
 end)
-
 VisualsTabViewmodelSection:Dropdown("Material",ArsoniaTable.Variables.Materials,function(x)
     ArsoniaTable.Visuals.Viewmodel.GunchamsMat=x
     if game.Workspace.CurrentCamera:FindFirstChild("Arms")then
@@ -1644,9 +1216,6 @@ VisualsTabViewmodelSection:Dropdown("Material",ArsoniaTable.Variables.Materials,
         end
     end
 end)
-
-
-
 local VisualsTabAmbienceSection=VisualsTab:Section("Ambience")
 VisualsTabAmbienceSection:Toggle("Enable Ambience",function(x)
     ArsoniaTable.Visuals.Worldambience.Enabled=x
@@ -1674,7 +1243,6 @@ VisualsTabAmbienceSection:Slider("Brightness",0,10,2,function(x)
     ArsoniaTable.Visuals.Worldambience.Brightness=x
 end)
 local VisualsTabMainSection=VisualsTab:Section("Misc")
-
 VisualsTabMainSection:Toggle("Enable Misc",function(x)
     ArsoniaTable.Visuals.Main.Enabled=x
     if not x then
@@ -1704,7 +1272,6 @@ VisualsTabMainSection:Toggle("Enable Misc",function(x)
         end
     end
 end)
-
 VisualsTabMainSection:ToggleSlider("X-Ray",0,10,5,function(x,y)
     ArsoniaTable.Visuals.Main.Xray=x
     ArsoniaTable.Visuals.Main.XrayTrans=y/10
@@ -1739,18 +1306,8 @@ end)
 VisualsTabMainSection:Color("Crosshair Color",Color3.fromRGB(196, 0, 255),function(x)
     ArsoniaTable.Visuals.Main.Crosshaircol=x
 end)
-
-
-
-
 local MiscTab=Window:Tab("Misc")
 local MiscTabMainSection=MiscTab:Section("Main")
-
-
-
-
-
-
 MiscTabMainSection:Toggle("Enable Misc",function(x)
     ArsoniaTable.Misc.Main.Enabled=x
     if not x then
@@ -1766,20 +1323,15 @@ MiscTabMainSection:Toggle("Enable Misc",function(x)
         game:GetService("ReplicatedStorage").wkspc.CurrentCurse.Value=ArsoniaTable.Misc.Main.Curse
     end
 end)
-
-
-
 MiscTabMainSection:Toggle("Fast Respawn",function(x)
         ArsoniaTable.Misc.Main.Fastrespawn=x
 end)
-
 MiscTabMainSection:Toggle("Anti Team Leader Effect",function(x)
     ArsoniaTable.Misc.Main.Antiteamleader=x
 end)
 MiscTabMainSection:Toggle("Anti Monkey ESP",function(x)
     ArsoniaTable.Misc.Main.Antimonkey=x
 end)
-
 MiscTabMainSection:Toggle("Auto Pickup Ball",function(x)
     ArsoniaTable.Misc.Main.Autopickupball=x
 end)
@@ -1835,7 +1387,7 @@ for _,v in pairs(game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.
         table.insert(a,v.id)
     end
 end
-while wait(0.5)do
+while wait(0.5) do
     game.TeleportService:TeleportToPlaceInstance(game.PlaceId,a[math.random(1,#a)])
 end
 end)
@@ -1891,8 +1443,7 @@ MiscTabTrollingSection:Toggle("Auto Player Surf",function(x)
 end)
 MiscTabTrollingSection:Toggle("Bananas Autofarm v2",function(Enabled)
     _G.BananaAutoFarm = Enabled
-while _G.BananaAutoFarm do
-    wait(0.1)
+while _G.BananaAutoFarm do wait(0.1)
 pcall(function()
         if game.Players.LocalPlayer.Character then
             local lastcfpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
@@ -1963,17 +1514,11 @@ MiscTabTrollingSection:Button("Free Badge",function()
 game:GetService("ReplicatedStorage").Events.ReplicateGear2:FireServer("coffee")
 end) 
 MiscTabTrollingSection:Button("Reedem Bucks Codes",function()
-    local args = {
-        [1] = "BLOXY"
-    }
-    game:GetService("ReplicatedStorage").Redeem:InvokeServer(unpack(args))
-    wait(1)
-    local args = {
-        [1] = "pog"
-    }
+    local args = {[1] = "BLOXY" }
+    game:GetService("ReplicatedStorage").Redeem:InvokeServer(unpack(args)) wait(1)
+    local args = {[1] = "pog"}
     game:GetService("ReplicatedStorage").Redeem:InvokeServer(unpack(args))
 end)
-
 local MiscTabSaveSection=MiscTab:Section("Configs")
 MiscTabSaveSection:Button("Save",function()
     pcall(function()
@@ -2003,9 +1548,7 @@ MiscTabSaveSection:Button("Load",function()
         "Bolts Slave/Hooker",
         "Loadded: "..a.." Features With "..b.." Errors",
         _G.UIMainColor or Color3.fromRGB(255,0,0),
-        Color3.new(255,0,0),
-        .01
-    )
+        Color3.new(255,0,0), .01)
 end)
 local MiscTabSaveSection=MiscTab:Section("Configs 2")
 MiscTabSaveSection:Button("Save",function()
@@ -2153,7 +1696,7 @@ game.Players.LocalPlayer.Character.ChildRemoved:Connect(function(x)
                 local a=game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
                 local b=game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                 repeat
-                    game.RunService.RenderStepped:Wait()
+                    wait(0.2)
                 until game.Players.LocalPlayer.Character:FindFirstChild("Spawned")or not ArsoniaTable.Player.Misc.DemiGod or game.Players.LocalPlayer.Status.Team.Value=="Spectator"or not ArsoniaTable.Player.Misc.Enabled
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=b
                 game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity=a
@@ -2455,11 +1998,6 @@ game.RunService.RenderStepped:Connect(function()
                 end
             end
         end
-        if ArsoniaTable.Player.Movement.Infdoublejump then
-            if game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.airjumps.Value~=0 then
-                game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.airjumps.Value=0
-            end
-        end
         if ArsoniaTable.Player.Movement.Autoairstrafe then
             if game.Players.LocalPlayer.Character.Humanoid.FloorMaterial==Enum.Material.Air or ArsoniaTable.Variables.KeysPressed[" "]then
                 local a=Instance.new("IntValue")
@@ -2556,8 +2094,10 @@ game.RunService.RenderStepped:Connect(function()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide=true
         end
     end
+	wait(0.1)
 end)
 game.RunService.RenderStepped:Connect(function()
+	wait(0.1)
     if ArsoniaTable.Visuals.ESP.Enabled then
         for _,v in pairs(ArsoniaTable.Variables.Functions.GetEnemys())do
             local part=v.Character.HumanoidRootPart
@@ -2692,6 +2232,7 @@ game.RunService.RenderStepped:Connect(function()
     end
 end)
 game.RunService.RenderStepped:Connect(function()
+	wait(0.1)
     if ArsoniaTable.Visuals.Main.Enabled then
         for _,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.GUI.Crosshairs.Crosshair:GetChildren())do
             if v.Name~="Center1"then
@@ -2739,6 +2280,7 @@ game.RunService.RenderStepped:Connect(function()
     end
 end)
 game.RunService.RenderStepped:Connect(function()
+	wait(0.1)
     if ArsoniaTable.Visuals.Viewmodel.Enabled then
         if ArsoniaTable.Visuals.Viewmodel.Gunchams then
             if game.Workspace.CurrentCamera:FindFirstChild("Arms")then
@@ -3359,7 +2901,7 @@ mt.__index=newcclosure(function(a,b)
     return oldIndex(a,b)
 end)
 coroutine.wrap(function()
-    while wait(.1)do
+    while wait(.15)do
         if ArsoniaTable.Aimbot.Silentaim.Enabled then
             pcall(function()
                 ArsoniaTable.Variables.TargetableParts={HeadHB={},Torso={},LeftArm={},RightArm={},LeftLeg={},RightLeg={},Backtrack_HeadHB={},Backtrack_Torso={},Backtrack_LeftArm={},Backtrack_RightArm={},Backtrack_LeftLeg={},Backtrack_RightLeg={}}
@@ -3424,7 +2966,7 @@ coroutine.wrap(function()
     end
 end)()
 coroutine.wrap(function()
-    while wait(.9)do
+    while wait(.95)do
         pcall(function()
             if ArsoniaTable.Misc.Trolling.Enabled then
                 if ArsoniaTable.Misc.Trolling.Voiceannoy then
@@ -3446,20 +2988,18 @@ coroutine.wrap(function()
     end
 end)()
 coroutine.wrap(function()
-    while wait(.09)do
+    while wait(.095)do
         pcall(function()
             if ArsoniaTable.Misc.Trolling.Enabled then
                 if ArsoniaTable.Misc.Trolling.Bulletannoy then
-                    for _,v in pairs(game.Players:GetChildren())do
-                        game:GetService("ReplicatedStorage").Events.Whizz:FireServer(v)
-                    end
+                    for _,v in pairs(game.Players:GetChildren())do game:GetService("ReplicatedStorage").Events.Whizz:FireServer(v) end
                 end
             end
         end)
     end
 end)()
 coroutine.wrap(function()
-    while wait(2)do
+    while wait(2.3)do
         pcall(function()
             if ArsoniaTable.Visuals.ESP.Enabled then
                 if ArsoniaTable.Visuals.ESP.Chams then
@@ -3515,9 +3055,7 @@ coroutine.wrap(function()
             if ArsoniaTable.Aimbot.Silentaim.Enabled then
                 if not game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.equipping.Value then
                     if ArsoniaTable.Aimbot.Silentaim.AutoshootMethod=="Force Fire"then
-                        if ArsoniaTable.Variables.__SilentAimTarget then
-                            require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).firebullet()
-                        end
+                        if ArsoniaTable.Variables.__SilentAimTarget then require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).firebullet() end
                     end
                 end
             end
@@ -3625,9 +3163,7 @@ require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.General).applyve
     if ArsoniaTable.Player.Misc.Enabled then
         if ArsoniaTable.Player.Misc.AntiFling then
             local args={...}
-            if args[5]~=game.Players.LocalPlayer.Name then
-                return
-            end
+            if args[5]~=game.Players.LocalPlayer.Name then return end
         end
     end
     return ArsoniaTable.Variables.Functions.OldApplyVelocity(...)
@@ -3643,25 +3179,15 @@ getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client).flamemoment.doflame=funct
     return ArsoniaTable.Variables.Functions.DoFlame(a,b,...)
 end
 getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).ShakeCam=function(...)
-    if ArsoniaTable.Combat.Gunmods.Enabled then
-        if ArsoniaTable.Combat.Gunmods.Removerecoil then
-            return
-        end
-    end
+    if ArsoniaTable.Combat.Gunmods.Enabled then if ArsoniaTable.Combat.Gunmods.Removerecoil then return end end
     return ArsoniaTable.Variables.Functions.Shakecam(...)
 end
 require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).getammo=function(...)
-    if ArsoniaTable.Combat.Gunmods.Enabled then
-        return math.clamp(ArsoniaTable.Variables.Functions.Getammo(...)+ArsoniaTable.Combat.Gunmods.Clipsize,0,999)
-    end
+    if ArsoniaTable.Combat.Gunmods.Enabled then return math.clamp(ArsoniaTable.Variables.Functions.Getammo(...)+ArsoniaTable.Combat.Gunmods.Clipsize,0,999) end
     return ArsoniaTable.Variables.Functions.Getammo(...)
 end
 require(game.ReplicatedStorage.Modules.Spread).calcspread=function(a,...)
-    if ArsoniaTable.Combat.Gunmods.Enabled then
-        if ArsoniaTable.Combat.Gunmods.Removespread then
-            a=0
-        end
-    end
+    if ArsoniaTable.Combat.Gunmods.Enabled then if ArsoniaTable.Combat.Gunmods.Removespread then a=0 end end
     return ArsoniaTable.Variables.Functions.CalculateSpread(a,...)
 end
 ArsoniaTable.Variables.Levels.StartBar=ArsoniaTable.Variables.Levels_OLD.StartBar --Fix
