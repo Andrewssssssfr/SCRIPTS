@@ -310,7 +310,7 @@ end
 local Window=Library:Window(name,Color3.fromRGB(196, 0, 255),700,Color3.fromRGB(196, 0, 255),700)
 local CombatTab=Window:Tab("Combat")
 local CombatTabMainSection=CombatTab:Section("Aimbot")
-CombatTabMainSection:Toggle("Kill All(Buggy)",function(state)
+CombatTabMainSection:Toggle("Kill All (Fast)",function(state)
     if state then
         game:GetService("ReplicatedStorage").wkspc.Status.RoundOver.Value = false
 local Farming = false
@@ -337,7 +337,7 @@ function StartAutofarm()
 										Back = true
 										repeat
 											PlayerLocked = v
-											wait(.1)
+											wait()
 											TurnBack = TurnBack - 0.1
 											if TurnBack <= 0 then
 												Back = false
@@ -352,9 +352,8 @@ function StartAutofarm()
 					end
 				end
 			end
-			wait(0.1)
+			wait()
 		until game:GetService("ReplicatedStorage").wkspc.Status.RoundOver.Value == true
-		wait(1)
 	end)
 end
 local num = 6
@@ -1312,13 +1311,13 @@ MiscTabMainSection:Toggle("Enable Misc",function(x)
     ArsoniaTable.Misc.Main.Enabled=x
     if not x then
         if ArsoniaTable.Misc.Main.Devicespoofer=="Mobile"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Touch")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Touch", "bro")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="PC"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("MouseButton1")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("MouseButton1", "bro")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="XBOX"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Gamepad1")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Gamepad1", "bro")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="None"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("none")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("none", "bro")
         end
         game:GetService("ReplicatedStorage").wkspc.CurrentCurse.Value=ArsoniaTable.Misc.Main.Curse
     end
@@ -1342,13 +1341,13 @@ MiscTabMainSection:Dropdown("Device Spoofer",{"PC","Mobile","XBOX","Wii Steering
     ArsoniaTable.Misc.Main.Devicespoofer=x
     if ArsoniaTable.Misc.Main.Enabled then
         if ArsoniaTable.Misc.Main.Devicespoofer=="Mobile"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Touch")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Touch", "bro")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="PC"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("MouseButton1")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("MouseButton1", "bro")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="XBOX"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Gamepad1")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Gamepad1", "bro")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="None"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("none")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("none", "bro")
         end
     end
 end)
@@ -1363,7 +1362,7 @@ spawn(function()
 local A_2 = Client.Values.ChatMsg
 local A_3 = false
 local Event = game:GetService("ReplicatedStorage").Events.PlayerChatted
-Event:FireServer(A_1, A_2, A_3)
+Event:FireServer(A_1, A_2, A_3, false, true)
         wait(0.1)
         end
     end
@@ -2544,7 +2543,7 @@ game.RunService.RenderStepped:Connect(function()
         end
         if ArsoniaTable.Misc.Main.Devicespoofer=="Wii Steering Wheel"then
             local a={"Touch","MouseButton1","Gamepad1","none"}
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer(a[math.random(1,#a)])
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer(a[math.random(1,#a)], "bro")
         end
         if ArsoniaTable.Misc.Main.Pingspoofer=="Random"then
             local a={0,.25,.5}
@@ -2679,18 +2678,6 @@ mt.__namecall=newcclosure(function(a,b,c,d,e,...)
                         d=ArsoniaTable.Variables.__SilentAimTarget.Position
                         e=CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0))
                     end
-                end
-            end
-        elseif tostring(a)=="CoolNewRemote"then
-            if ArsoniaTable.Misc.Main.Enabled then
-                if ArsoniaTable.Misc.Main.Devicespoofer=="Mobile"then
-                    b="Touch"
-                elseif ArsoniaTable.Misc.Main.Devicespoofer=="PC"then
-                    b="MouseButton1"
-                elseif ArsoniaTable.Misc.Main.Devicespoofer=="XBOX"then
-                    b="Gamepad1"
-                elseif ArsoniaTable.Misc.Main.Devicespoofer=="None"then
-                    b="none"
                 end
             end
         end
