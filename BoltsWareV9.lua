@@ -1,9 +1,30 @@
 --Made By Bolts And The3Bakers and tysm to Andrew for undetection once again!
-local ping = 32 
+
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Bolts Ware V9";
+    Text = "Thank you kimito for showcasing this script";
+    Duration = 5;
+    Button1 = "OK";
+})
+
+warn("Thank you kimito for showcasing this script __ROBLOX_NOTIF__LOG")
+
+wait()
+
+game.StarterGui:SetCore("SendNotification", {
+    Title = "Bolts Ware V9";
+    Text = "Kimito ima that XScripts guy (Finny) lol";
+    Duration = 5;
+    Button1 = "OK";
+})
+
+warn("Kimito ima that XScripts guy (Finny) lol __ROBLOX_NOTIF__LOG")
+
+local ping = 56 
 spawn(function()
 while wait(0.15) do
     wait(0.15)
-    ping = math.random(10, 15)end end)
+    ping = math.random(55, 120)end end)
 spawn(function()
     game:GetService("RunService").RenderStepped:connect(function()game.Players.LocalPlayer.Ping.Value = ping end)while wait(0.1) do local args = {
 [1] = 500,
@@ -300,7 +321,7 @@ local name="Bolts Ware v9 - Undetected - "..identifyexecutor()..""
 if _G.Funnyname then
     local Prefix={"Epic","","Working"}
     local Names={"Astolfo","Baker","Thigh","Breast","Femboy","Hentai","Aim","Tits","Arsenal","Rolve"}
-    local Suffix={"sense","ware"," Hub"," Hack","-Ware"}
+    local Suffix={"sense","ware"," Hub"," Hack","-Ware", "SUSSY_BAKA"}
     local Version=tostring(math.random(1,9))for _=1,math.random(0,3)do Version=Version.."."..tostring(math.random(0,9))end
     local VersionSuffix={"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"}
     local Place_Holder={}for _,v in pairs(VersionSuffix)do table.insert(Place_Holder,string.upper(v))end for _,v in pairs(Place_Holder)do table.insert(VersionSuffix,v)end
@@ -310,7 +331,7 @@ end
 local Window=Library:Window(name,Color3.fromRGB(196, 0, 255),700,Color3.fromRGB(196, 0, 255),700)
 local CombatTab=Window:Tab("Combat")
 local CombatTabMainSection=CombatTab:Section("Aimbot")
-CombatTabMainSection:Toggle("Kill All (Fast)",function(state)
+CombatTabMainSection:Toggle("Kill All",function(state)
     if state then
         game:GetService("ReplicatedStorage").wkspc.Status.RoundOver.Value = false
 local Farming = false
@@ -439,10 +460,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	end
 end)
 end)
-CombatTabMainSection:Toggle("Wallbang Bypass V3 (Clips)",function(state)
+CombatTabMainSection:Toggle("Wallbang Bypass",function(state)
     Client.Toggles.WallbangV2 = state
 end)
-CombatTabMainSection:Toggle("Triggerbot (Toggle Slient Aim To Work)",function(x)
+CombatTabMainSection:Toggle("Triggerbot (Toggle Slient Aim)",function(x)
     if x then
             ArsoniaTable.Aimbot.Silentaim.AutoshootMethod="Force Fire"
     else
@@ -539,7 +560,7 @@ CombatTabGunmodsSection:Toggle("Enable Gun Mods",function(x)
     getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client).givetools()
     require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).usethatgun()
 end)
-CombatTabGunmodsSection:Toggle("Firerate v2",function(state)
+CombatTabGunmodsSection:Toggle("Firerate",function(state)
 Config.FireRate = state
 for _, v in pairs(game.ReplicatedStorage.Weapons:GetDescendants()) do
     if v.Name == "FireRate" then
@@ -551,7 +572,7 @@ for _, v in pairs(game.ReplicatedStorage.Weapons:GetDescendants()) do
     end
 end
 end)
-CombatTabGunmodsSection:Toggle("Infinite Ammo v2",function(state)
+CombatTabGunmodsSection:Toggle("Infinite Ammo",function(state)
 Config.Infammo = state
 game:GetService("RunService").Stepped:connect(function()
     task.spawn(function()
@@ -671,7 +692,8 @@ end)
 CombatTabGunmodsSection:Toggle("Remove Zoom Effect",function(x)
     ArsoniaTable.Combat.Gunmods.Keepfov=x
 end)
-CombatTabGunmodsSection:Dropdown("Firemode",{"Current","Semi-Automatic","Automatic"},function(x)
+firemodes = {"Current","Automatic"}
+CombatTabGunmodsSection:Dropdown("Firemode",firemodes,function(x)
     ArsoniaTable.Combat.Gunmods.Firemode=x
     if ArsoniaTable.Combat.Gunmods.Enabled then
         if game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.gun.Value then
@@ -759,7 +781,7 @@ function clip()
 	end
 	Clip = true
 end
-PlayerTabAntiAimSection:Toggle("Noclip (now toggleable)",function(x)
+PlayerTabAntiAimSection:Toggle("Noclip",function(x)
     if x then
         noclip()
     else
@@ -836,18 +858,13 @@ PlayerTabMovementSection:ToggleSlider("Walkspeed",1,250,16,function(x,y)
     ArsoniaTable.Player.Movement.Walkspeed=y
 end)
 _G.infinjump = false
-local Player = game:GetService("Players").LocalPlayer
-local Mouse = Player:GetMouse()
-Mouse.KeyDown:connect(function(k)
-	if _G.infinjump then
-        if k:byte() == 32 then
-            Humanoid = game:GetService("Players").LocalPlayer:FindFirstChild('Character'):FindFirstChildOfClass("Humanoid")
-            Humanoid:ChangeState("Jumping")
-        end
-	end
+game:GetService("UserInputService").JumpRequest:connect(function()
+    if _G.infinjump then
+        game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+    end
 end)
-PlayerTabMovementSection:Toggle("Infinite Jump",function(x)
-    _G.infinjump = x
+PlayerTabMovementSection:Toggle("Infinite Jump",function(noB)
+    _G.infinjump = noB
 end)
 PlayerTabMovementSection:ToggleSlider("Bunny Hop",1,5,1,function(x,y)
     ArsoniaTable.Player.Movement.Bunnyhop=x
@@ -874,19 +891,19 @@ PlayerTabMovementSection:Toggle("Anti Crouch Jump Lock/Speed",function(x)
     ArsoniaTable.Player.Movement.Anticrouchjumplock=x
 end)
 local PlayerTabMiscSection=PlayerTab:Section("Miscellaneous")
-PlayerTabMiscSection:Button("Invisible + God Mode",function()
+PlayerTabMiscSection:Button("GodMode + Invisible",function()
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cesare0328/my-scripts/main/arsenal%20inv.lua'),true))()
 end)
 PlayerTabMiscSection:Toggle("Enable Miscellaneous",function(x)
     ArsoniaTable.Player.Misc.Enabled=x
 end)
-PlayerTabMiscSection:Toggle("Anti-Fire",function(x)
+PlayerTabMiscSection:Toggle("Anti Fire",function(x)
     ArsoniaTable.Player.Misc.AntiFire=x
 end)
-PlayerTabMiscSection:Toggle("Anti-Bleed",function(x)
+PlayerTabMiscSection:Toggle("Anti Bleed",function(x)
     ArsoniaTable.Player.Misc.AntiBleed=x
 end)
-PlayerTabMiscSection:Toggle("Semi Fast Heal",function(x)
+PlayerTabMiscSection:Toggle("Fast Heal",function(x)
     ArsoniaTable.Player.Misc.FastHeal=x
 end)
 PlayerTabMiscSection:Toggle("Demi God",function(x)
@@ -916,12 +933,24 @@ end)
 PlayerTabMiscSection:Slider("Uncrouch Animation Speed",-100,100,60,function(x)
     ArsoniaTable.Player.Misc.CrouchSpunval=1-(x/100)
 end)
+
+local VisualsTab=Window:Tab("Visuals")
+local VisualsTabESPSection=VisualsTab:Section("ESP")
+
 local Config = {
     Visuals = {
+        Enabled = false,
+        BoxEsp = false,
+        TracerEsp = false,
+        TracersOrigin = "Top", 
+        NameEsp = false,
+        DistanceEsp = false,
         SkeletonEsp = false,
-		EnemyColor = Color3.fromRGB(255,0,0),
+        EnemyColor = Color3.fromRGB(255, 0, 0),
+        TeamColor = Color3.fromRGB(0, 255, 0),
     }
 }
+
 local Funcs = {}
 function Funcs:IsAlive(player)
     if player and player.Character and player.Character:FindFirstChild("Head") and
@@ -930,15 +959,36 @@ function Funcs:IsAlive(player)
         return true
     end
 end
+
 function Funcs:Round(number)
     return math.floor(tonumber(number) + 0.5)
 end
+
+function Funcs:DrawSquare()
+    local Box = Drawing.new("Square")
+    Box.Color = Color3.fromRGB(190, 190, 0)
+    Box.Thickness = 0.5
+    Box.Filled = false
+    Box.Transparency = 1
+    return Box
+end
+
 function Funcs:DrawLine()
     local line = Drawing.new("Line")
     line.Color = Color3.new(190, 190, 0)
-    line.Thickness = 1.5
+    line.Thickness = 0.5
     return line
 end
+
+function Funcs:DrawText()
+    local text = Drawing.new("Text")
+    text.Color = Color3.fromRGB(190, 190, 0)
+    text.Size = 20
+    text.Outline = true
+    text.Center = true
+    return text
+end
+
 local Services =
     setmetatable(
     {
@@ -951,7 +1001,12 @@ local Services =
         end
     }
 )
+
 function Funcs:AddEsp(player)
+    local Box = Funcs:DrawSquare()
+    local Tracer = Funcs:DrawLine()
+    local Name = Funcs:DrawText()
+    local Distance = Funcs:DrawText()
     local SnapLines = Funcs:DrawLine()
     local HeadLowerTorso = Funcs:DrawLine()
     local NeckLeftUpper = Funcs:DrawLine()
@@ -964,7 +1019,7 @@ function Funcs:AddEsp(player)
     local RightLowerRightUpper = Funcs:DrawLine()
     Services.RunService.Stepped:Connect(
         function()
-            if Funcs:IsAlive(player) and player.Character:FindFirstChild("HumanoidRootPart") then
+            if Funcs:IsAlive(player) and player.Character:FindFirstChild("HumanoidRootPart") and Config.Visuals.Enabled then
                 local RootPosition, OnScreen =
                     Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position)
                 local HeadPosition =
@@ -973,7 +1028,78 @@ function Funcs:AddEsp(player)
                     Services.Camera:WorldToViewportPoint(
                     player.Character.HumanoidRootPart.Position - Vector3.new(0, 4, 0)
                 )
-                if Config.Visuals.SkeletonEsp then
+                if Config.Visuals.BoxEsp and game.Players.LocalPlayer.Team ~= player.Team then
+                    Box.Visible = OnScreen
+                    Box.Size = Vector2.new((2350 / RootPosition.Z) + 2.5, HeadPosition.Y - LegPosition.Y)
+                    Box.Position = Vector2.new((RootPosition.X - Box.Size.X / 2) - 1, RootPosition.Y - Box.Size.Y / 2)
+                else
+                    Box.Visible = false
+                end
+                if Config.Visuals.TracerEsp and game.Players.LocalPlayer.Team ~= player.Team then
+                    Tracer.Visible = OnScreen
+                    if Config.Visuals.TracersOrigin == "Top" then
+                        Tracer.To = Vector2.new(Services.Camera.ViewportSize.X / 2, 0)
+                        Tracer.From =
+                            Vector2.new(
+                            Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position).X - 1,
+                            RootPosition.Y + (HeadPosition.Y - LegPosition.Y) / 2
+                        )
+                    elseif Config.Visuals.TracersOrigin == "Middle" then
+                        Tracer.To = Vector2.new(Services.Camera.ViewportSize.X / 2, Services.Camera.ViewportSize.Y / 2)
+                        Tracer.From =
+                            Vector2.new(
+                            Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position).X - 1,
+                            (RootPosition.Y + (HeadPosition.Y - LegPosition.Y) / 2) -
+                                ((HeadPosition.Y - LegPosition.Y) / 2)
+                        )
+                    elseif Config.Visuals.TracersOrigin == "Bottom" then
+                        Tracer.To = Vector2.new(Services.Camera.ViewportSize.X / 2, 1000)
+                        Tracer.From =
+                            Vector2.new(
+                            Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position).X - 1,
+                            RootPosition.Y - (HeadPosition.Y - LegPosition.Y) / 2
+                        )
+                    elseif Config.Visuals.TracersOrigin == "Mouse" then
+                        Tracer.To = game:GetService("UserInputService"):GetMouseLocation()
+                        Tracer.From =
+                            Vector2.new(
+                            Services.Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position).X - 1,
+                            (RootPosition.Y + (HeadPosition.Y - LegPosition.Y) / 2) -
+                                ((HeadPosition.Y - LegPosition.Y) / 2)
+                        )
+                    end
+                else
+                    Tracer.Visible = false
+                end
+                if Config.Visuals.NameEsp and game.Players.LocalPlayer.Team ~= player.Team then
+                    Name.Visible = OnScreen
+                    Name.Position =
+                        Vector2.new(
+                        Services.Camera:WorldToViewportPoint(player.Character.Head.Position).X,
+                        Services.Camera:WorldToViewportPoint(player.Character.Head.Position).Y - 40
+                    )
+                    Name.Text = "[ " .. player.Name .. " ]"
+                else
+                    Name.Visible = false
+                end
+                if Config.Visuals.DistanceEsp and player.Character:FindFirstChild("Head") and game.Players.LocalPlayer.Team ~= player.Team then
+                    Distance.Visible = OnScreen
+                    Distance.Position =
+                        Vector2.new(
+                        Services.Camera:WorldToViewportPoint(player.Character.Head.Position).X,
+                        Services.Camera:WorldToViewportPoint(player.Character.Head.Position).Y - 25
+                    )
+                    Distance.Text =
+                        "[ " ..
+                        Funcs:Round(
+                            (game:GetService("Players").LocalPlayer.Character.Head.Position -
+                                player.Character.Head.Position).Magnitude
+                        ) ..
+                            " Studs ]" -- Random Adam Was Here
+                else
+                    Distance.Visible = false
+                end
+                if Config.Visuals.SkeletonEsp and game.Players.LocalPlayer.Team ~= player.Team then
                     HeadLowerTorso.Visible = OnScreen
                     HeadLowerTorso.From =
                         Vector2.new(
@@ -1090,7 +1216,11 @@ function Funcs:AddEsp(player)
                     LowerTorsoRightUpper.Visible = false
                     RightLowerRightUpper.Visible = false
                 end
-                if game.Players.LocalPlayer.TeamColor ~= player.TeamColor then
+                if game.Players.LocalPlayer.Team ~= player.Team then
+                    Box.Color = Config.Visuals.EnemyColor
+                    Tracer.Color = Config.Visuals.EnemyColor
+                    Name.Color = Config.Visuals.EnemyColor
+                    Distance.Color = Config.Visuals.EnemyColor
                     HeadLowerTorso.Color = Config.Visuals.EnemyColor
                     NeckLeftUpper.Color = Config.Visuals.EnemyColor
                     LeftUpperLeftLower.Color = Config.Visuals.EnemyColor
@@ -1101,6 +1231,10 @@ function Funcs:AddEsp(player)
                     LowerTorsoRightUpper.Color = Config.Visuals.EnemyColor
                     RightLowerRightUpper.Color = Config.Visuals.EnemyColor
                 else
+                    Box.Visible = false
+                    Tracer.Visible = false
+                    Name.Visible = false
+                    Distance.Visible = false
 					HeadLowerTorso.Visible = false
                     NeckLeftUpper.Visible = false
                     LeftUpperLeftLower.Visible = false
@@ -1112,6 +1246,10 @@ function Funcs:AddEsp(player)
                     RightLowerRightUpper.Visible = false
                 end
             else
+                Box.Visible = false
+                Tracer.Visible = false
+                Name.Visible = false
+                Distance.Visible = false
                 HeadLowerTorso.Visible = false
                 NeckLeftUpper.Visible = false
                 LeftUpperLeftLower.Visible = false
@@ -1125,11 +1263,13 @@ function Funcs:AddEsp(player)
         end
     )
 end
-for _, v in pairs(Services.Players:GetPlayers()) do
+
+for i, v in pairs(Services.Players:GetPlayers()) do
     if v ~= Services.LocalPlayer then
         Funcs:AddEsp(v)
     end
 end
+
 Services.Players.PlayerAdded:Connect(
     function(player)
         if v ~= Services.LocalPlayer then
@@ -1137,37 +1277,31 @@ Services.Players.PlayerAdded:Connect(
         end
     end
 )
-local VisualsTab=Window:Tab("Visuals")
-local VisualsTabESPSection=VisualsTab:Section("ESP")
-VisualsTabESPSection:Toggle("Enable ESP",function(x)
-    ArsoniaTable.Visuals.ESP.Enabled=x
+VisualsTabESPSection:Toggle("Enable Esp",function(x)
+    Config.Visuals.Enabled = x
 end)
-VisualsTabESPSection:Toggle("Box",function(x)
-    ArsoniaTable.Visuals.ESP.Box=x
+VisualsTabESPSection:Toggle("Box Esp",function(x)
+    Config.Visuals.BoxEsp = x
 end)
-VisualsTabESPSection:Toggle("Chams",function(x)
-    ArsoniaTable.Visuals.ESP.Chams=x
+VisualsTabESPSection:Toggle("Name Esp",function(x)
+    Config.Visuals.NameEsp = x
 end)
-VisualsTabESPSection:Toggle("Backtrack Chams",function(x)
-    ArsoniaTable.Visuals.ESP.BacktrackChams=x
+VisualsTabESPSection:Toggle("Distance Esp",function(x)
+    Config.Visuals.DistanceEsp = x
 end)
-VisualsTabESPSection:Toggle("Names",function(x)
-    ArsoniaTable.Visuals.ESP.Names=x
+VisualsTabESPSection:Toggle("Skeleton Esp (laggy)",function(x)
+    Config.Visuals.SkeletonEsp = x
 end)
-VisualsTabESPSection:Toggle("Skeletons ESP",function(state)
-    Config.Visuals.SkeletonEsp = state
+VisualsTabESPSection:Toggle("Tracer Esp",function(x)
+    Config.Visuals.TracerEsp = x
+    warn("Bolts pls ask ur the3bakers for normal esp, ok?")
 end)
-VisualsTabESPSection:Toggle("Tracers",function(x)
-    ArsoniaTable.Visuals.ESP.Tracers=x
+origins = {'Top','Middle','Bottom'}
+VisualsTabESPSection:Dropdown("Tracers Origin",origins,function(x)
+	Config.Visuals.TracersOrigin = x
 end)
-VisualsTabESPSection:Toggle("Health",function(x)
-    ArsoniaTable.Visuals.ESP.Health=x
-end)
-VisualsTabESPSection:Color("Every Thing Else",Color3.fromRGB(196, 0, 255),function(x)
-    ArsoniaTable.Visuals.ESP.Color=x
-end)
-VisualsTabESPSection:Color("Skeleton Color",Color3.new(255, 0, 0),function(Color)
-	Config.Visuals.EnemyColor = Color
+VisualsTabESPSection:Color("Esp Color",Color3.fromRGB(196, 0, 255),function(x)
+    Config.Visuals.EnemyColor = x
 end)
 local VisualsTabViewmodelSection=VisualsTab:Section("Viewmodel")
 VisualsTabViewmodelSection:Toggle("Enable Viewmodel",function(x)
@@ -1337,7 +1471,7 @@ end)
 MiscTabMainSection:Toggle("Collect Bananas",function(x)
     ArsoniaTable.Misc.Main.Autopickupbanana=x
 end)
-MiscTabMainSection:Dropdown("Device Spoofer",{"PC","Mobile","XBOX","Wii Steering Wheel","None"},function(x)
+MiscTabMainSection:Dropdown("Device Spoofer",{"PC","Mobile","XBOX","None"},function(x)
     ArsoniaTable.Misc.Main.Devicespoofer=x
     if ArsoniaTable.Misc.Main.Enabled then
         if ArsoniaTable.Misc.Main.Devicespoofer=="Mobile"then
@@ -1355,8 +1489,7 @@ MiscTabMainSection:Toggle("Chat Spam",function(state)
     Client.Toggles.SpamChat = state
 end)
 spawn(function()
-    while true do
-        wait(.01)
+    while wait(.01) do
         if Client.Toggles.SpamChat == true then
         local A_1 = "Hah!"
 local A_2 = Client.Values.ChatMsg
@@ -1418,7 +1551,7 @@ end)
 MiscTabMenuSection:Slider("Arsenal FOV",10, 120, 90,function(num)
     game:GetService("Players").LocalPlayer.Settings.FOV.Value = num
 end)
-MiscTabMenuSection:Slider("FE Gravity",1, 100, 45,function(value)
+MiscTabMenuSection:Slider("Gravity",1, 100, 45,function(value)
     game:GetService("ReplicatedStorage").CurrentGrav.Value = value
 end)
 MiscTabMenuSection:Slider("TimeScale",1, 10, 1,function(TimeScaleFR)
@@ -1440,7 +1573,7 @@ end)
 MiscTabTrollingSection:Toggle("Auto Player Surf",function(x)
     ArsoniaTable.Misc.Trolling.PlayerSurf=x
 end)
-MiscTabTrollingSection:Toggle("Bananas Autofarm v2",function(Enabled)
+MiscTabTrollingSection:Toggle("Bananas Autofarm",function(Enabled)
     _G.BananaAutoFarm = Enabled
 while _G.BananaAutoFarm do wait(0.1)
 pcall(function()
@@ -1457,16 +1590,16 @@ pcall(function()
     end)
 end
 end)
-MiscTabTrollingSection:Toggle("Auto Player Surf",function(x)
+MiscTabTrollingSection:Toggle("FE Cool Sunglasses",function(x)
     getgenv().innoisgay = x
     while getgenv().innoisgay do wait(0.1) game:GetService("ReplicatedStorage").Events.Sunglasses:FireServer() end
 end)
-MiscTabTrollingSection:Button("Get FE Rectangle Must Have Monky To Work",function()
+MiscTabTrollingSection:Button("FE Rectangle Must Have Monky",function()
 game.Players.LocalPlayer.Character["Banana Bod"].Handle.SpecialMesh:Destroy()
 game.Players.LocalPlayer.Character["Banana Bod"].Handle.Decal:Destroy()
 game:GetService("Players").LocalPlayer.Data.Skin.Value = "Nonexisty"
 end)
-MiscTabTrollingSection:Button("Remove Dumb Unusual On Hoilday Pilot",function()
+MiscTabTrollingSection:Button("Remove Unusual On Hoilday Pilot",function()
     while game.Players.LocalPlayer.Character.Head:FindFirstChild("Unusual") do
   game.Players.LocalPlayer.Character.Head.Unusual:Destroy()
 end
@@ -1497,7 +1630,7 @@ game.Players.LocalPlayer.Character.FakeHead:Destroy()
 local esc = game.Players.LocalPlayer.Character.UpperTorso:GetChildren()
 for i, v in pairs(esc) do
     v:Destroy()
-    wait()
+    --wait()
 end
 end)
 MiscTabTrollingSection:Button("FE Headless",function() 
@@ -1507,12 +1640,11 @@ if game.Players.LocalPlayer.Character:FindFirstChild("HeadHB")then
         if game.Players.LocalPlayer.Character:FindFirstChild("FakeHead")then
             game.Players.LocalPlayer.Character:FindFirstChild("FakeHead"):Destroy()
         end
-
 end)
 MiscTabTrollingSection:Button("Free Badge",function()
 game:GetService("ReplicatedStorage").Events.ReplicateGear2:FireServer("coffee")
 end) 
-MiscTabTrollingSection:Button("Reedem Bucks Codes",function()
+MiscTabTrollingSection:Button("Reedem Codes",function()
     local args = {[1] = "BLOXY" }
     game:GetService("ReplicatedStorage").Redeem:InvokeServer(unpack(args)) wait(1)
     local args = {[1] = "pog"}
@@ -1617,60 +1749,25 @@ MiscTabSaveSection:Button("Load",function()
 end)
 local E=Window:Tab("Info")
 local W=E:Section("Info")
-W:Button("MY DISCORD ACCOUNT IS BANNED, so DM bolts#8455",function()
+W:Button("Press RightShift To Toggle GUI",function()
 end)
-W:Button("Press RightShift To Hide The GUI",function()
+W:Button("Inno is pretty :) (Edited By Finny)",function()
 end)
-W:Button("This script is protected by Websec",function()
-end)
-W:Button("Dont try to spam the webhook lol",function()
-end)
-W:Button("If you want to donate to me",function()
-end)
-W:Button("inno is a b*tch edited on 9/13/22",function()
-end)
-W:Button("Cash App : $Bolts.GG",function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title="Bolts Says",
-            Text="Copied Successfully!",
-            Duration=15
-        })
-    setclipboard("$Bolts.GG")
-end)
-W:Button("Bitcoin Click To Copy Adress ",function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title="Bolts Says",
-            Text="Copied Successfully!",
-            Duration=15
-        })
-    setclipboard("3JAqWPuSfER17WVwxaA5RFznQrmYb8yjy7")
-end)
-W:Button("3JAqWPuSfER17WVwxaA5RFznQrmYb8yjy7",function()
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title="Bolts Says",
-            Text="Copied Successfully!",
-            Duration=15
-        })
-    print("3JAqWPuSfER17WVwxaA5RFznQrmYb8yjy7")
-end)
-W:Button("Copy Discord Link To Clip Board",function()
+W:Button("Copy discord link",function()
     setclipboard("https://discord.gg/zbnGJU6Att")
-end)
-W:Button("Click to copy TOS",function()
-setclipboard("You argee that your username your country and your executer will be publicly logged and you agree that bolts is not reponsable for you being banned from arsenal and also you agree that you will not use your main account when exploiting")
-end)
-W:Button("Undetected Once Again (ty to Andrew)",function()
 end)
 local E=Window:Tab("Credits")
 local W=E:Section("Credits")
-W:Button("Bolts#8888- Owner",function()
+W:Button("Bolts#8888 - Owner",function()
 end)
 W:Button("The3Bakers - Helper",function()
     setclipboard("https://discord.gg/zbnGJU6Att")
 end)
 W:Button("Storm - Co Owner",function()
 end)
-W:Button("Lolcat - Helper/Slave",function()
+W:Button("Finny - Remote Protector",function()
+end)
+W:Button("Lolcat - Helper",function()
 end)
 game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(x)
     ArsoniaTable.Variables.KeysPressed[x]=true
@@ -2097,141 +2194,6 @@ game.RunService.RenderStepped:Connect(function()
 end)
 game.RunService.RenderStepped:Connect(function()
 	wait(0.1)
-    if ArsoniaTable.Visuals.ESP.Enabled then
-        for _,v in pairs(ArsoniaTable.Variables.Functions.GetEnemys())do
-            local part=v.Character.HumanoidRootPart
-            local _,b=game.Workspace.CurrentCamera:WorldToViewportPoint(part.Position)
-            if b then
-                if ArsoniaTable.Visuals.ESP.Names then
-                    local a=Drawing.new("Text")
-                    a.Text=v.Name
-                    a.Size=math.clamp(25-(part.Position-game.Workspace.CurrentCamera.CFrame.Position).Magnitude,25,100)
-                    a.Center=true
-                    a.Outline=true
-                    a.OutlineColor=Color3.new()
-                    a.Font=Drawing.Fonts.UI
-                    a.Visible=true
-                    a.Transparency=1
-                    a.Color=ArsoniaTable.Visuals.ESP.Color
-                    a.Position=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.UpVector*(3+(part.Position-game.Workspace.CurrentCamera.CFrame.Position).Magnitude/25)).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.UpVector*(3+(part.Position-game.Workspace.CurrentCamera.CFrame.Position).Magnitude/25)).Y)
-                    coroutine.wrap(function()
-                        game.RunService.RenderStepped:Wait()
-                        a:Remove()
-                    end)()
-                end
-                if ArsoniaTable.Visuals.ESP.Box then
-                    local a=Drawing.new("Quad")
-                    a.Visible=true
-                    a.Color=ArsoniaTable.Visuals.ESP.Color
-                    a.Thickness=1
-                    a.Transparency=1
-                    a.Filled=false
-                    a.PointA=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*-2+part.CFrame.UpVector*2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*-2+part.CFrame.UpVector*2.5).Y)
-                    a.PointB=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*2.5).Y)--<^
-                    a.PointC=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*-2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*-2.5).Y)--<V
-                    a.PointD=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*-2+part.CFrame.UpVector*-2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*-2+part.CFrame.UpVector*-2.5).Y)-->V
-                    coroutine.wrap(function()
-                        game.RunService.RenderStepped:Wait()
-                        a:Remove()
-                    end)()
-                end
-                if ArsoniaTable.Visuals.ESP.Tracers then
-                    local b=Drawing.new("Line")
-                    b.Visible=true
-                    b.Color=ArsoniaTable.Visuals.ESP.Color
-                    b.Thickness=1
-                    b.Transparency=1
-                    b.To=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.UpVector*-2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.UpVector*-2.5).Y)
-                    b.From=Vector2.new(game:GetService("CoreGui").RobloxGui.AbsoluteSize.X/2,game:GetService("CoreGui").RobloxGui.AbsoluteSize.Y-game:GetService("CoreGui").ThemeProvider.TopBarFrame.AbsolutePosition.Y)
-                    coroutine.wrap(function()
-                        game.RunService.RenderStepped:Wait()
-                        b:Remove()
-                    end)()
-                end
-                if ArsoniaTable.Visuals.ESP.Health then
-                    local healthnum=v.NRPBS.Health.Value
-                    local maxhealth=v.NRPBS.MaxHealth.Value
-                    local c=Drawing.new("Quad")
-                    c.Visible=true
-                    c.Color=ArsoniaTable.Visuals.ESP.Color
-                    c.Thickness=1
-                    c.Transparency=1
-                    c.Filled=false
-                    c.PointA=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*2.5).Y)-->^
-                    c.PointB=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*2.5).Y)--<^
-                    c.PointC=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*-2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*-2.5).Y)--<V
-                    c.PointD=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*-2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*-2.5).Y)-->V
-                    coroutine.wrap(function()
-                    game.RunService.RenderStepped:Wait()
-                        c:Remove()
-                    end)()
-                    local e=Drawing.new("Quad")
-                    e.Visible=true
-                    e.Color=Color3.new(1,0,0)
-                    e.Thickness=1
-                    e.Transparency=1
-                    e.Filled=true
-                    e.PointA=Vector2.new(
-                    game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*2.5).Y)-->^
-                    e.PointB=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*2.5).Y)--<^
-                    e.PointC=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*-2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*-2.5).Y)--<V
-                    e.PointD=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*-2.5).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*-2.5).Y)-->V
-                    coroutine.wrap(function()
-                        game.RunService.RenderStepped:Wait()
-                        e:Remove()
-                    end)()
-                    local d=Drawing.new("Quad")
-                    d.Visible=true
-                    d.Color=Color3.new(0,1,0)
-                    d.Thickness=1
-                    d.Transparency=1
-                    d.Filled=true
-                    d.PointA=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*(-2.5+healthnum/(maxhealth/5))).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2.5+part.CFrame.UpVector*(-2.5+healthnum/(maxhealth/5))).Y)-->^
-                    d.PointB=Vector2.new(
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*(-2.5+healthnum/(maxhealth/5))).X,
-                        game.Workspace.CurrentCamera:WorldToViewportPoint(part.CFrame.Position+part.CFrame.RightVector*2+part.CFrame.UpVector*(-2.5+healthnum/(maxhealth/5))).Y)--<^
-                    d.PointC=c.PointC--<V
-                    d.PointD=c.PointD-->V
-                    coroutine.wrap(function()
-                        game.RunService.RenderStepped:Wait()
-                        d:Remove()
-                    end)()
-                end
-            end
-        end
-    end
-end)
-game.RunService.RenderStepped:Connect(function()
-	wait(0.1)
     if ArsoniaTable.Visuals.Main.Enabled then
         for _,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.GUI.Crosshairs.Crosshair:GetChildren())do
             if v.Name~="Center1"then
@@ -2393,6 +2355,7 @@ game.RunService.RenderStepped:Connect(function()
             circ.Radius=ArsoniaTable.Aimbot.Silentaim.Fov
             coroutine.wrap(function()
                 game.RunService.RenderStepped:wait()
+				wait()
                 circ:Remove()
             end)()
             local test_anal=false
@@ -2888,7 +2851,7 @@ mt.__index=newcclosure(function(a,b)
     return oldIndex(a,b)
 end)
 coroutine.wrap(function()
-    while wait(.15)do
+    while wait(.17)do
         if ArsoniaTable.Aimbot.Silentaim.Enabled then
             pcall(function()
                 ArsoniaTable.Variables.TargetableParts={HeadHB={},Torso={},LeftArm={},RightArm={},LeftLeg={},RightLeg={},Backtrack_HeadHB={},Backtrack_Torso={},Backtrack_LeftArm={},Backtrack_RightArm={},Backtrack_LeftLeg={},Backtrack_RightLeg={}}
@@ -2938,6 +2901,7 @@ coroutine.wrap(function()
 end)()
 coroutine.wrap(function()
     while game.RunService.RenderStepped:Wait()do
+		wait()
         pcall(function()
             if ArsoniaTable.Player.Movement.Bunnyhop then
                 if ArsoniaTable.Player.Movement.BunnyhopType=="Legit"then
@@ -2953,7 +2917,7 @@ coroutine.wrap(function()
     end
 end)()
 coroutine.wrap(function()
-    while wait(.95)do
+    while wait(0.4)do
         pcall(function()
             if ArsoniaTable.Misc.Trolling.Enabled then
                 if ArsoniaTable.Misc.Trolling.Voiceannoy then
@@ -2975,7 +2939,7 @@ coroutine.wrap(function()
     end
 end)()
 coroutine.wrap(function()
-    while wait(.095)do
+    while wait(0.5)do
         pcall(function()
             if ArsoniaTable.Misc.Trolling.Enabled then
                 if ArsoniaTable.Misc.Trolling.Bulletannoy then
@@ -2986,63 +2950,13 @@ coroutine.wrap(function()
     end
 end)()
 coroutine.wrap(function()
-    while wait(2.3)do
-        pcall(function()
-            if ArsoniaTable.Visuals.ESP.Enabled then
-                if ArsoniaTable.Visuals.ESP.Chams then
-                    for _,v in pairs(ArsoniaTable.Variables.Functions.GetEnemys())do
-                        for _,c in pairs(ArsoniaTable.Variables.HumParts)do
-                            if v.Character:FindFirstChild(c)then
-                                local part=v.Character[c]
-                                local a=Instance.new("BoxHandleAdornment")
-                                if c=="Head"then
-                                    a.Size=Vector3.new(1.05,1.05,1.05)
-                                else
-                                    a.Size=part.Size+Vector3.new(.05,.05,.05)
-                                end
-                                a.Parent=game.CoreGui
-                                a.AlwaysOnTop=true
-                                a.Adornee=part
-                                a.ZIndex=0
-                                a.Color3=ArsoniaTable.Visuals.ESP.Color
-                                coroutine.wrap(function()
-                                    wait(1.1)
-                                    a:Destroy()
-                                end)()
-                                if ArsoniaTable.Visuals.ESP.Chamsoutline then
-                                    local part=v.Character[c]
-                                    local a=Instance.new("BoxHandleAdornment")
-                                    local off=ArsoniaTable.Visuals.ESP.ChamsoutlineSize
-                                    if c=="Head"then
-                                        a.Size=Vector3.new(1+off,1+off,1+off)
-                                    else
-                                        a.Size=part.Size+Vector3.new(off,off,off)
-                                    end
-                                    a.Parent=game.CoreGui
-                                    a.AlwaysOnTop=false
-                                    a.Adornee=part
-                                    a.ZIndex=0
-                                    a.Color3=ArsoniaTable.Visuals.ESP.ChamsoutlineColor
-                                    coroutine.wrap(function()
-                                        wait(1.1)
-                                        a:Destroy()
-                                    end)()
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end)
-    end
-end)()
-coroutine.wrap(function()
-    while game.RunService.RenderStepped:Wait()do
+    while game.RunService.RenderStepped:Wait() do
+		wait(.001)
         pcall(function()
             if ArsoniaTable.Aimbot.Silentaim.Enabled then
                 if not game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.equipping.Value then
                     if ArsoniaTable.Aimbot.Silentaim.AutoshootMethod=="Force Fire"then
-                        if ArsoniaTable.Variables.__SilentAimTarget then require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).firebullet() end
+                        if ArsoniaTable.Variables.__SilentAimTarget then require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).firebullet() task.wait(.04) end
                     end
                 end
             end
@@ -3051,6 +2965,7 @@ coroutine.wrap(function()
 end)()
 coroutine.wrap(function()
     while game.RunService.RenderStepped:Wait()do
+		wait()
         pcall(function()
             if ArsoniaTable.Player.Anti_Aim.Enabled then
                 if ArsoniaTable.Player.Anti_Aim.Crouchspam then
@@ -3081,6 +2996,7 @@ coroutine.wrap(function()
 end)()
 coroutine.wrap(function()
     while game.RunService.RenderStepped:Wait()do
+		wait()
         pcall(function()
             if ArsoniaTable.Player.Anti_Aim.Enabled then
                 if ArsoniaTable.Player.Anti_Aim.FakeLag then
@@ -3164,14 +3080,6 @@ getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client).flamemoment.doflame=funct
         end
     end
     return ArsoniaTable.Variables.Functions.DoFlame(a,b,...)
-end
-getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).ShakeCam=function(...)
-    if ArsoniaTable.Combat.Gunmods.Enabled then if ArsoniaTable.Combat.Gunmods.Removerecoil then return end end
-    return ArsoniaTable.Variables.Functions.Shakecam(...)
-end
-require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).getammo=function(...)
-    if ArsoniaTable.Combat.Gunmods.Enabled then return math.clamp(ArsoniaTable.Variables.Functions.Getammo(...)+ArsoniaTable.Combat.Gunmods.Clipsize,0,999) end
-    return ArsoniaTable.Variables.Functions.Getammo(...)
 end
 require(game.ReplicatedStorage.Modules.Spread).calcspread=function(a,...)
     if ArsoniaTable.Combat.Gunmods.Enabled then if ArsoniaTable.Combat.Gunmods.Removespread then a=0 end end
