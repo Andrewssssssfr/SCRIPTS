@@ -946,6 +946,7 @@ local Config = {
         NameEsp = false,
         DistanceEsp = false,
         SkeletonEsp = false,
+        ShowTeam = false,
         EnemyColor = Color3.fromRGB(255, 0, 0),
         TeamColor = Color3.fromRGB(0, 255, 0),
     }
@@ -1028,14 +1029,14 @@ function Funcs:AddEsp(player)
                     Services.Camera:WorldToViewportPoint(
                     player.Character.HumanoidRootPart.Position - Vector3.new(0, 4, 0)
                 )
-                if Config.Visuals.BoxEsp and game.Players.LocalPlayer.Team ~= player.Team then
+                if Config.Visuals.BoxEsp then
                     Box.Visible = OnScreen
                     Box.Size = Vector2.new((2350 / RootPosition.Z) + 2.5, HeadPosition.Y - LegPosition.Y)
                     Box.Position = Vector2.new((RootPosition.X - Box.Size.X / 2) - 1, RootPosition.Y - Box.Size.Y / 2)
                 else
                     Box.Visible = false
                 end
-                if Config.Visuals.TracerEsp and game.Players.LocalPlayer.Team ~= player.Team then
+                if Config.Visuals.TracerEsp then
                     Tracer.Visible = OnScreen
                     if Config.Visuals.TracersOrigin == "Top" then
                         Tracer.To = Vector2.new(Services.Camera.ViewportSize.X / 2, 0)
@@ -1071,7 +1072,7 @@ function Funcs:AddEsp(player)
                 else
                     Tracer.Visible = false
                 end
-                if Config.Visuals.NameEsp and game.Players.LocalPlayer.Team ~= player.Team then
+                if Config.Visuals.NameEsp then
                     Name.Visible = OnScreen
                     Name.Position =
                         Vector2.new(
@@ -1082,7 +1083,7 @@ function Funcs:AddEsp(player)
                 else
                     Name.Visible = false
                 end
-                if Config.Visuals.DistanceEsp and player.Character:FindFirstChild("Head") and game.Players.LocalPlayer.Team ~= player.Team then
+                if Config.Visuals.DistanceEsp and player.Character:FindFirstChild("Head") then
                     Distance.Visible = OnScreen
                     Distance.Position =
                         Vector2.new(
@@ -1099,7 +1100,7 @@ function Funcs:AddEsp(player)
                 else
                     Distance.Visible = false
                 end
-                if Config.Visuals.SkeletonEsp and game.Players.LocalPlayer.Team ~= player.Team then
+                if Config.Visuals.SkeletonEsp then
                     HeadLowerTorso.Visible = OnScreen
                     HeadLowerTorso.From =
                         Vector2.new(
@@ -1231,19 +1232,19 @@ function Funcs:AddEsp(player)
                     LowerTorsoRightUpper.Color = Config.Visuals.EnemyColor
                     RightLowerRightUpper.Color = Config.Visuals.EnemyColor
                 else
-                    Box.Visible = false
-                    Tracer.Visible = false
-                    Name.Visible = false
-                    Distance.Visible = false
-					HeadLowerTorso.Visible = false
-                    NeckLeftUpper.Visible = false
-                    LeftUpperLeftLower.Visible = false
-                    NeckRightUpper.Visible = false
-                    RightUpperLeftLower.Visible = false
-                    LowerTorsoLeftUpper.Visible = false
-                    LeftLowerLeftUpper.Visible = false
-                    LowerTorsoRightUpper.Visible = false
-                    RightLowerRightUpper.Visible = false
+                    Box.Color = Config.Visuals.TeamColor
+                    Tracer.Color = Config.Visuals.TeamColor
+                    Name.Color = Config.Visuals.TeamColor
+                    Distance.Color = Config.Visuals.TeamColor
+                    HeadLowerTorso.Color = Config.Visuals.TeamColor
+                    NeckLeftUpper.Color = Config.Visuals.TeamColor
+                    LeftUpperLeftLower.Color = Config.Visuals.TeamColor
+                    NeckRightUpper.Color = Config.Visuals.TeamColor
+                    RightUpperLeftLower.Color = Config.Visuals.TeamColor
+                    LowerTorsoLeftUpper.Color = Config.Visuals.TeamColor
+                    LeftLowerLeftUpper.Color = Config.Visuals.TeamColor
+                    LowerTorsoRightUpper.Color = Config.Visuals.TeamColor
+                    RightLowerRightUpper.Color = Config.Visuals.TeamColor
                 end
             else
                 Box.Visible = false
@@ -1280,6 +1281,7 @@ Services.Players.PlayerAdded:Connect(
 VisualsTabESPSection:Toggle("Enable Esp",function(x)
     Config.Visuals.Enabled = x
 end)
+warn("ffa is the error")
 VisualsTabESPSection:Toggle("Box Esp",function(x)
     Config.Visuals.BoxEsp = x
 end)
@@ -1300,7 +1302,10 @@ origins = {'Top','Middle','Bottom'}
 VisualsTabESPSection:Dropdown("Tracers Origin",origins,function(x)
 	Config.Visuals.TracersOrigin = x
 end)
-VisualsTabESPSection:Color("Esp Color",Color3.fromRGB(196, 0, 255),function(x)
+VisualsTabESPSection:Color("Enemy Color",Color3.fromRGB(196, 0, 255),function(x)
+    Config.Visuals.EnemyColor = x
+end)
+VisualsTabESPSection:Color("Team Color",Color3.fromRGB(0, 255, 0),function(x)
     Config.Visuals.EnemyColor = x
 end)
 local VisualsTabViewmodelSection=VisualsTab:Section("Viewmodel")
