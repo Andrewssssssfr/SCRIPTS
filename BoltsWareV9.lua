@@ -3,7 +3,6 @@
 game.StarterGui:SetCore("SendNotification", {
     Title = "Bolts Ware V9";
     Text = "Thank you kimito for showcasing this script";
-    Duration = 5;
     Button1 = "OK";
 })
 
@@ -14,7 +13,6 @@ wait()
 game.StarterGui:SetCore("SendNotification", {
     Title = "Bolts Ware V9";
     Text = "Kimito ima that XScripts guy (Finny) lol";
-    Duration = 5;
     Button1 = "OK";
 })
 
