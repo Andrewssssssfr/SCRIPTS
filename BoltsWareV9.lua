@@ -1281,7 +1281,6 @@ Services.Players.PlayerAdded:Connect(
 VisualsTabESPSection:Toggle("Enable Esp",function(x)
     Config.Visuals.Enabled = x
 end)
-warn("ffa is the error")
 VisualsTabESPSection:Toggle("Box Esp",function(x)
     Config.Visuals.BoxEsp = x
 end)
@@ -1306,7 +1305,7 @@ VisualsTabESPSection:Color("Enemy Color",Color3.fromRGB(196, 0, 255),function(x)
     Config.Visuals.EnemyColor = x
 end)
 VisualsTabESPSection:Color("Team Color",Color3.fromRGB(0, 255, 0),function(x)
-    Config.Visuals.EnemyColor = x
+    Config.Visuals.TeamColor = x
 end)
 local VisualsTabViewmodelSection=VisualsTab:Section("Viewmodel")
 VisualsTabViewmodelSection:Toggle("Enable Viewmodel",function(x)
