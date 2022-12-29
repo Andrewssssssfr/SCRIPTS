@@ -1,15 +1,17 @@
 --Made By Bolts And The3Bakers and tysm to Andrew for undetection once again!
 
+if getgenv().BoltsWareV10 then return print("no.") end
+getgenv().BoltsWareV10 = true;
+
 game.StarterGui:SetCore("SendNotification", {
-    Title = "Bolts Ware V9";
+    Title = "Bolts Ware V10";
     Text = "Thank you kimito for showcasing this script";
     Button1 = "OK";
 })
 
-Client = {
-    Toggles = {WallbangV2 = false, SpamChat = false},
-    Values = {ChatMsg = 'Bolts Ware v10 On Top'}
-}
+Client = { Toggles = {WallbangV2 = false, SpamChat = false},Values = {ChatMsg = 'Bolts Ware v10 On Top'}}
+
+local script = getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client)
 
 local spoofTroll = "noDATA"
 local oldNamecall
@@ -49,14 +51,6 @@ end)
 
 Library=loadstring(game:HttpGet("https://pastebin.com/raw/bfSMHFwJ"))()
 ConfigInfammo = false
-local mt = getrawmetatable(game)
-local index = mt.__index
-setreadonly(mt, false)
-mt.__index = newcclosure(function(self, k)
-    if k == "Clips" and Client.Toggles.WallbangV2 then return workspace.Map end
-    return index(self, k)
-end)
-setreadonly(mt, true)
 local ArsoniaTable={
     Player={
         Anti_Aim={
@@ -289,7 +283,7 @@ local ArsoniaTable={
             GetTrueIgnore=function()local Ignore={game.Players.LocalPlayer.Character,game.Workspace.Ray_Ignore,game.Workspace.CurrentCamera}if game.Workspace:FindFirstChild("Map")then if game.Workspace.Map:FindFirstChild("Ignore")then table.insert(Ignore,game.Workspace.Map.Ignore)end if game.Workspace.Map:FindFirstChild("Clips")then table.insert(Ignore,game.Workspace.Map.Clips)end end return Ignore end,
             GetPos1FromRay=function(Ray)local a=string.gsub(string.split(tostring(Ray),"},")[1],"{","")local b=string.split(a,", ")return Vector3.new(b[1],b[2],b[3])end,
             GetPos2FromRay=function(Ray)local a=string.gsub(string.split(tostring(Ray),"}, {")[2],"}","")a=string.split(a,", ")return Vector3.new(a[1],a[2],a[3])end,
-            _=(function()debug.setconstant(getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client).updtprimary,9,"ArsoniaStoredAmmo")for _,v in next, (game.ReplicatedStorage.Weapons:GetChildren())do if v:FindFirstChild("FireRate")then local a=v.FireRate:Clone()a.Parent=v a.Name="ArsoniaFireRate"end if v:FindFirstChild("ReloadTime")then local a=v.ReloadTime:Clone()a.Parent=v a.Name="ArsoniaReloadTime"end if v:FindFirstChild("EReloadTime")then local a=v.EReloadTime:Clone()a.Parent=v a.Name="ArsoniaEReloadTime"end if v:FindFirstChild("EquipTime")then local a=v.EquipTime:Clone()a.Parent=v a.Name="ArsoniaEquipTime"end if v:FindFirstChild("StoredAmmo")then local a=v.StoredAmmo:Clone()a.Parent=v a.Name="ArsoniaStoredAmmo"end if v:FindFirstChild("Range")and v:FindFirstChild("Melee")and v:FindFirstChild("Backstab")then local a=v.Range:Clone()a.Parent=v a.Name="ArsoniaRange"end end end)(),
+            _=(function()debug.setconstant(script.updtprimary,9,"ArsoniaStoredAmmo")for _,v in next, (game.ReplicatedStorage.Weapons:GetChildren())do if v:FindFirstChild("FireRate")then local a=v.FireRate:Clone()a.Parent=v a.Name="ArsoniaFireRate"end if v:FindFirstChild("ReloadTime")then local a=v.ReloadTime:Clone()a.Parent=v a.Name="ArsoniaReloadTime"end if v:FindFirstChild("EReloadTime")then local a=v.EReloadTime:Clone()a.Parent=v a.Name="ArsoniaEReloadTime"end if v:FindFirstChild("EquipTime")then local a=v.EquipTime:Clone()a.Parent=v a.Name="ArsoniaEquipTime"end if v:FindFirstChild("StoredAmmo")then local a=v.StoredAmmo:Clone()a.Parent=v a.Name="ArsoniaStoredAmmo"end if v:FindFirstChild("Range")and v:FindFirstChild("Melee")and v:FindFirstChild("Backstab")then local a=v.Range:Clone()a.Parent=v a.Name="ArsoniaRange"end end end)(),
             Unpacktable=(function()local a={["\a"]="\\a",["\b"]="\\b",["\f"]="\\f",["\n"]="\\n",["\r"]="\\r",["\t"]="\\t",["\v"]="\\v",["\0"]="\\0"}local b={["and"]=true,["break"]=true,["do"]=true,["else"]=true,["elseif"]=true,["end"]=true,["false"]=true,["for"]=true,["function"]=true,["if"]=true,["in"]=true,["local"]=true,["nil"]=true,["not"]=true,["or"]=true,["repeat"]=true,["return"]=true,["then"]=true,["true"]=true,["until"]=true,["while"]=true,["continue"]=true}local c={[DockWidgetPluginGuiInfo.new]="DockWidgetPluginGuiInfo.new",[warn]="warn",[CFrame.fromMatrix]="CFrame.fromMatrix",[CFrame.fromAxisAngle]="CFrame.fromAxisAngle",[CFrame.fromOrientation]="CFrame.fromOrientation",[CFrame.fromEulerAnglesXYZ]="CFrame.fromEulerAnglesXYZ",[CFrame.Angles]="CFrame.Angles",[CFrame.fromEulerAnglesYXZ]="CFrame.fromEulerAnglesYXZ",[CFrame.new]="CFrame.new",[gcinfo]="gcinfo",[os.clock]="os.clock",[os.difftime]="os.difftime",[os.time]="os.time",[os.date]="os.date",[tick]="tick",[bit32.band]="bit32.band",[bit32.extract]="bit32.extract",[bit32.bor]="bit32.bor",[bit32.bnot]="bit32.bnot",[bit32.arshift]="bit32.arshift",[bit32.rshift]="bit32.rshift",[bit32.rrotate]="bit32.rrotate",[bit32.replace]="bit32.replace",[bit32.lshift]="bit32.lshift",[bit32.lrotate]="bit32.lrotate",[bit32.btest]="bit32.btest",[bit32.bxor]="bit32.bxor",[pairs]="pairs",[NumberSequence.new]="NumberSequence.new",[assert]="assert",[tonumber]="tonumber",[Color3.fromHSV]="Color3.fromHSV",[Color3.toHSV]="Color3.toHSV",[Color3.fromRGB]="Color3.fromRGB",[Color3.new]="Color3.new",[Delay]="Delay",[Stats]="Stats",[UserSettings]="UserSettings",[coroutine.resume]="coroutine.resume",[coroutine.yield]="coroutine.yield",[coroutine.running]="coroutine.running",[coroutine.status]="coroutine.status",[coroutine.wrap]="coroutine.wrap",[coroutine.create]="coroutine.create",[coroutine.isyieldable]="coroutine.isyieldable",[NumberRange.new]="NumberRange.new",[PhysicalProperties.new]="PhysicalProperties.new",[PluginManager]="PluginManager",[Ray.new]="Ray.new",[NumberSequenceKeypoint.new]="NumberSequenceKeypoint.new",[Version]="Version",[Vector2.new]="Vector2.new",[Instance.new]="Instance.new",[delay]="delay",[spawn]="spawn",[unpack]="unpack",[string.split]="string.split",[string.match]="string.match",[string.gmatch]="string.gmatch",[string.upper]="string.upper",[string.gsub]="string.gsub",[string.format]="string.format",[string.lower]="string.lower",[string.sub]="string.sub",[string.pack]="string.pack",[string.rep]="string.rep",[string.char]="string.char",[string.packsize]="string.packsize",[string.reverse]="string.reverse",[string.byte]="string.byte",[string.unpack]="string.unpack",[string.len]="string.len",[string.find]="string.find",[CellId.new]="CellId.new",[ypcall]="ypcall",[version]="version",[print]="print",[stats]="stats",[printidentity]="printidentity",[settings]="settings",[UDim2.fromOffset]="UDim2.fromOffset",[UDim2.fromScale]="UDim2.fromScale",[UDim2.new]="UDim2.new",[table.pack]="table.pack",[table.move]="table.move",[table.insert]="table.insert",[table.getn]="table.getn",[table.foreachi]="table.foreachi",[table.maxn]="table.maxn",[table.foreach]="table.foreach",[table.concat]="table.concat",[table.unpack]="table.unpack",[table.find]="table.find",[table.create]="table.create",[table.sort]="table.sort",[table.remove]="table.remove",[TweenInfo.new]="TweenInfo.new",[loadstring]="loadstring",[require]="require",[Vector3.FromNormalId]="Vector3.FromNormalId",[Vector3.FromAxis]="Vector3.FromAxis",[Vector3.fromAxis]="Vector3.fromAxis",[Vector3.fromNormalId]="Vector3.fromNormalId",[Vector3.new]="Vector3.new",[Vector3int16.new]="Vector3int16.new",[setmetatable]="setmetatable",[next]="next",[Wait]="Wait",[wait]="wait",[ipairs]="ipairs",[elapsedTime]="elapsedTime",[time]="time",[rawequal]="rawequal",[Vector2int16.new]="Vector2int16.new",[collectgarbage]="collectgarbage",[newproxy]="newproxy",[Spawn]="Spawn",[PluginDrag.new]="PluginDrag.new",[Region3.new]="Region3.new",[utf8.offset]="utf8.offset",[utf8.codepoint]="utf8.codepoint",[utf8.nfdnormalize]="utf8.nfdnormalize",[utf8.char]="utf8.char",[utf8.codes]="utf8.codes",[utf8.len]="utf8.len",[utf8.graphemes]="utf8.graphemes",[utf8.nfcnormalize]="utf8.nfcnormalize",[xpcall]="xpcall",[tostring]="tostring",[rawset]="rawset",[PathWaypoint.new]="PathWaypoint.new",[DateTime.fromUnixTimestamp]="DateTime.fromUnixTimestamp",[DateTime.now]="DateTime.now",[DateTime.fromIsoDate]="DateTime.fromIsoDate",[DateTime.fromUnixTimestampMillis]="DateTime.fromUnixTimestampMillis",[DateTime.fromLocalTime]="DateTime.fromLocalTime",[DateTime.fromUniversalTime]="DateTime.fromUniversalTime",[Random.new]="Random.new",[typeof]="typeof",[RaycastParams.new]="RaycastParams.new",[math.log]="math.log",[math.ldexp]="math.ldexp",[math.rad]="math.rad",[math.cosh]="math.cosh",[math.random]="math.random",[math.frexp]="math.frexp",[math.tanh]="math.tanh",[math.floor]="math.floor",[math.max]="math.max",[math.sqrt]="math.sqrt",[math.modf]="math.modf",[math.pow]="math.pow",[math.atan]="math.atan",[math.tan]="math.tan",[math.cos]="math.cos",[math.sign]="math.sign",[math.clamp]="math.clamp",[math.log10]="math.log10",[math.noise]="math.noise",[math.acos]="math.acos",[math.abs]="math.abs",[math.sinh]="math.sinh",[math.asin]="math.asin",[math.min]="math.min",[math.deg]="math.deg",[math.fmod]="math.fmod",[math.randomseed]="math.randomseed",[math.atan2]="math.atan2",[math.ceil]="math.ceil",[math.sin]="math.sin",[math.exp]="math.exp",[getfenv]="getfenv",[pcall]="pcall",[ColorSequenceKeypoint.new]="ColorSequenceKeypoint.new",[ColorSequence.new]="ColorSequence.new",[type]="type",[Region3int16.new]="Region3int16.new",[ElapsedTime]="ElapsedTime",[select]="select",[getmetatable]="getmetatable",[rawget]="rawget",[Faces.new]="Faces.new",[Rect.new]="Rect.new",[BrickColor.Blue]="BrickColor.Blue",[BrickColor.White]="BrickColor.White",[BrickColor.Yellow]="BrickColor.Yellow",[BrickColor.Red]="BrickColor.Red",[BrickColor.Gray]="BrickColor.Gray",[BrickColor.palette]="BrickColor.palette",[BrickColor.New]="BrickColor.New",[BrickColor.Black]="BrickColor.Black",[BrickColor.Green]="BrickColor.Green",[BrickColor.Random]="BrickColor.Random",[BrickColor.DarkGray]="BrickColor.DarkGray",[BrickColor.random]="BrickColor.random",[BrickColor.new]="BrickColor.new",[setfenv]="setfenv",[UDim.new]="UDim.new",[Axes.new]="Axes.new",[error]="error",[debug.traceback]="debug.traceback",[debug.profileend]="debug.profileend",[debug.profilebegin]="debug.profilebegin"}function GetHierarchy(d)local e={}local f=1;local g=d;while g do g=g.Parent;f=f+1 end;g=d;local h=0;while g do h=h+1;local i=string.gsub(g.Name,"[%c%z]",a)i=g==game and"game"or i;if b[i]or not string.match(i,"^[_%a][_%w]*$")then i='["'..i..'"]'elseif h~=f-1 then i="."..i end;e[f-h]=i;g=g.Parent end;return table.concat(e)end;local function j(k,l)if l=="string"then return string.format('"%s"',string.gsub(k,"[%c%z]",a))elseif l=="Instance"then return GetHierarchy(k)elseif type(k)~=l then return l..".new("..tostring(k)..")"elseif l=="function"then return c[k]or"'[Unknown "..(pcall(setfenv,k,getfenv(k))and"Lua"or"C").." "..tostring(k).."]'"elseif l=="userdata"then return"newproxy("..tostring(not not getmetatable(k))..")"elseif l=="thread"then return"'"..tostring(k)..", status: "..coroutine.status(k).."'"else return tostring(k)end end;local function m(n,o,p,q)o=o or{}local r=o[n]if r then return(r[1]==p[1]-1 and"'[Cyclic Parent "or"'[Cyclic ")..tostring(n)..", path: "..r[2].."]'"end;q=q or"ROOT"p=p or{0,q}local s=p[1]+1;p[1]=s;p[2]=q;o[n]=p;local t=string.rep("    ",s)local u=string.rep("    ",s-1)local v="{"local w="\n"..t;local x=true;local y=1;local z=true;for A,k in next,n do z=false;if y~=A then x=false else y=y+1 end;local B,C=typeof(A),typeof(k)local D=false;if B=="string"then A=string.gsub(A,"[%c%z]",a)if b[A]or not string.match(A,"^[_%a][_%w]*$")then D=true;A=string.format('["%s"]',A)end else D=true;A="["..(B=="table"and string.gsub(m(A,o,{s,q}),"^%s*(.-)%s*$","%1")or j(A,B)).."]"end;k=C=="table"and m(k,o,{s,q},q..(D and""or".")..A)or j(k,C)v=v..w..(x and k or A.." = "..k)..","end;return z and v.."}"or string.sub(v,1,-2).."\n"..u.."}"end;return m end)(),
             IsRoundOver=function()if game.ReplicatedStorage.wkspc.Status.RoundOver.Value or game.ReplicatedStorage.wkspc.Status.Preparation.Value then return true end return false end,
         },
@@ -1000,6 +994,19 @@ local Config = {
         TeamColor = Color3.fromRGB(0, 255, 0),
     }
 }
+local mt = getrawmetatable(game)
+local index = mt.__index
+setreadonly(mt, false)
+mt.__index = newcclosure(function(self, k)
+    if k == "Clips" and Client.Toggles.WallbangV2 then return workspace.Map end
+	if k == "Clips" and ArsoniaTable.Aimbot.Silentaim.Enabled then
+		if not game.ReplicatedStorage.Weapons[game.Players.LocalPlayer.NRPBS.EquippedTool.Value]:FindFirstChild("Projectile") then
+			return workspace.Map
+		end
+	end
+    return index(self, k)
+end)
+setreadonly(mt, true)
 local Funcs = {}
 function Funcs:IsAlive(player)
     if player and player.Character and player.Character:FindFirstChild("Head") and
@@ -1270,6 +1277,20 @@ VisualsTabViewmodelSection:Color("Color",Color3.fromRGB(196, 0, 255),function(x)
         end
     end
 end)
+function closest()
+    local TargetDistance = 1000000000000
+    local Target = nil
+    for _,v in next, game.Players:GetPlayers() do
+        if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+            local Mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude
+            if Mag < TargetDistance then
+                TargetDistance = Mag
+                Target = v
+            end
+        end
+    end
+    return Target
+end
 VisualsTabViewmodelSection:ToggleSlider("Gun Chams",255,9,5,function(x,y)
     ArsoniaTable.Visuals.Viewmodel.Gunchams=x
     ArsoniaTable.Visuals.Viewmodel.GunchamsTrans=y/10
@@ -1448,7 +1469,7 @@ spawn(function()
 		end
     end
 end)
-MiscTabMainSection:Textbox("Custom Chat Message","Bolts Ware V9 On Top",function(x)
+MiscTabMainSection:Textbox("Custom Chat Message","Bolts Ware V10 On Top",function(x)
 	Client.Values.ChatMsg = tostring(x)
 end)
 MiscTabMainSection:Dropdown("Curse",{"None","Self-Knockback","Infinite Ammo","Fast Hands","Speedy","No Jumps","Slowed","Double Tap","Enraged","Slowed Tap","Hidden","Mystery"},function(x)
@@ -1489,8 +1510,14 @@ MiscTabMenuSection:Textbox("Menu Title","ARSENAL",function(x)
         c=c..v
     end
     c=string.upper(c)
-    game:GetService("Players").LocalPlayer.PlayerGui.Menew.Main.Title.Text=c
-    game:GetService("Players").LocalPlayer.PlayerGui.Menew.Main.Title.DropShadow.Text=c
+    game.Players.LocalPlayer.PlayerGui.Menew.Main.Title.Text=c
+    game.Players.LocalPlayer.PlayerGui.Menew.Main.Title.DropShadow.Text=c
+end)
+MiscTabMenuSection:Textbox("Menu User",game.Players.LocalPlayer.Name,function(x)
+    ArsoniaTable.Variables.Levels.Name=x
+end)
+MiscTabMenuSection:Textbox("Menu Level",ArsoniaTable.Variables.Levels.Level,function(x)
+    ArsoniaTable.Variables.Levels.Level=x
 end)
 MiscTabMenuSection:Slider("XP Bar",0,100,50,function(x)
     ArsoniaTable.Variables.Levels.StartBar=x
@@ -1517,9 +1544,6 @@ end)
 local MiscTabTrollingSection=MiscTab:Section("Trolling")
 MiscTabTrollingSection:Toggle("Enabled",function(x)
     ArsoniaTable.Misc.Trolling.Enabled=x
-end)
-MiscTabTrollingSection:Toggle("Bullet Annoy",function(x)
-    ArsoniaTable.Misc.Trolling.Bulletannoy=x
 end)
 MiscTabTrollingSection:Toggle("Voice Annoy",function(x)
     ArsoniaTable.Misc.Trolling.Voiceannoy=x
@@ -1773,6 +1797,58 @@ game.RunService.Stepped:Connect(function()
         if not game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide=true
         end
+    end
+end)
+spawn(function()
+	while wait(.05) do
+		if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+			ArsoniaTable.Variables.Crouching=false
+			if game.Players.LocalPlayer.Character:FindFirstChild("Crouched")then
+				ArsoniaTable.Variables.Crouching=true
+			end
+			if game.Players.LocalPlayer.PlayerGui.Menew.Main.LevelMeter.StartXP.Text~=ArsoniaTable.Variables.Levels.StartXp.." xp"then
+				game.Players.LocalPlayer.PlayerGui.Menew.Main.LevelMeter.StartXP.Text=ArsoniaTable.Variables.Levels.StartXp.." xp"
+			end
+			if game.Players.LocalPlayer.PlayerGui.Menew.Main.LevelMeter.EndXP.Text~=ArsoniaTable.Variables.Levels.EndXp.." xp"then
+				game.Players.LocalPlayer.PlayerGui.Menew.Main.LevelMeter.EndXP.Text=ArsoniaTable.Variables.Levels.EndXp.." xp"
+			end
+			if game.Players.LocalPlayer.PlayerGui.Menew.Main.LevelMeter.FILL.FILL.Size~=UDim2.new(ArsoniaTable.Variables.Levels.StartBar/ArsoniaTable.Variables.Levels.EndBar,0,1,0)then
+				game.Players.LocalPlayer.PlayerGui.Menew.Main.LevelMeter.FILL.FILL.Size=UDim2.new(ArsoniaTable.Variables.Levels.StartBar/ArsoniaTable.Variables.Levels.EndBar,0,1,0)
+			end
+			if game.Players.LocalPlayer.PlayerGui.Menew.Main.PlrName.Text~=ArsoniaTable.Variables.Levels.Name.." - Level: "..ArsoniaTable.Variables.Levels.Level then
+				game.Players.LocalPlayer.PlayerGui.Menew.Main.PlrName.Text=ArsoniaTable.Variables.Levels.Name.." - Level: "..ArsoniaTable.Variables.Levels.Level
+			end
+			if tostring(game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.gun.Value)==game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.melee.Value then
+				ArsoniaTable.Variables.IsKnife=true
+			else
+				ArsoniaTable.Variables.IsKnife=false
+			end
+			if game.Players.LocalPlayer.Character:FindFirstChild("IsAPlayer")then
+				ArsoniaTable.Variables.IsAlive=true
+			else
+				ArsoniaTable.Variables.IsAlive=false
+			end
+			ArsoniaTable.Variables.Offset_GUN=Vector3.new()
+			if workspace.CurrentCamera:FindFirstChild("Arms")then
+				for _,v in next, game.Workspace.CurrentCamera.Arms:GetChildren() do
+					if v:IsA("Vector3Value") then
+						ArsoniaTable.Variables.Offset_GUN=v.Value
+						break
+					end
+				end
+			end
+			if script.lastlook~=10000 then
+				script.lastlook=10000
+			end
+			ArsoniaTable.Variables.IsFall=false
+			if game.Players.LocalPlayer.Character.Humanoid:GetState()==Enum.HumanoidStateType.Ragdoll or game.Players.LocalPlayer.Character.Humanoid:GetState()==Enum.HumanoidStateType.GettingUp then
+				ArsoniaTable.Variables.IsFall=true
+			end
+			if game.Players.LocalPlayer.Character.Head.Size~=Vector3.new(1,.1,1)then
+				game.Players.LocalPlayer.Character.Head.Size=Vector3.new(1,.1,1)
+			end
+			ArsoniaTable.Variables.CamAngles={workspace.CurrentCamera.CFrame:ToEulerAnglesYXZ()}
+		end
     end
 end)
 game.RunService.RenderStepped:Connect(function()
@@ -2062,7 +2138,7 @@ spawn(function()
 		if ArsoniaTable.Aimbot.Silentaim.Enabled then
 			ArsoniaTable.Variables.__SilentAimTarget=nil
 			local a
-			local b=math.huge
+			local b=100000000000000
 			if ArsoniaTable.Aimbot.Silentaim.Ignorefov then
 				if ArsoniaTable.Variables.TargetableParts[ArsoniaTable.Aimbot.Silentaim.Target][1]then
 					for _,v in next, (ArsoniaTable.Variables.TargetableParts[ArsoniaTable.Aimbot.Silentaim.Target])do
@@ -2284,7 +2360,9 @@ spawn(function()
 				end
 			end
 			if ArsoniaTable.Misc.Main.Fastrespawn then
-				getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client).reviveme=true
+				if game.Players.LocalPlayer.Status.Team.Value ~="Spectator" and game.Players.LocalPlayer.NRPBS.Health.Value <= 0 then
+					script.reviveme=true
+				end
 			end
 			if ArsoniaTable.Misc.Main.Antiteamleader then
 				if game.Players.LocalPlayer:FindFirstChild("TeamLeader")then
@@ -2415,11 +2493,7 @@ mt.__namecall=newcclosure(function(a,b,c,d,e,...)
                     end
                     if ArsoniaTable.Player.Anti_Aim.Torso then
                         if ArsoniaTable.Player.Anti_Aim.TorsoType=="Offset"then
-                            c=
-                            (
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*
-                                CFrame.Angles(0,ArsoniaTable.Player.Anti_Aim.TorsoValue,0)
-                            ).LookVector
+                            c=(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.Angles(0,ArsoniaTable.Player.Anti_Aim.TorsoValue,0)).LookVector
                         elseif ArsoniaTable.Player.Anti_Aim.TorsoType=="Down"then
                             c=Vector3.new()
                             b=b*2
@@ -2461,11 +2535,23 @@ mt.__namecall=newcclosure(function(a,b,c,d,e,...)
             if ArsoniaTable.Aimbot.Silentaim.Enabled then
                 if ArsoniaTable.Variables.__SilentAimTarget then
                     if ArsoniaTable.Aimbot.Silentaim.Hitchance>=math.random(1,100)then
-                        c=ArsoniaTable.Variables.__SilentAimTarget.Position
-                        d=CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0))
+                        d=ArsoniaTable.Variables.__SilentAimTarget.Position
+                        e=CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0))
                     end
                 end
             end
+		elseif tostring(a)=="CoolNewRemote"then
+			if ArsoniaTable.Misc.Main.Enabled then
+				if ArsoniaTable.Misc.Main.Devicespoofer=="Mobile"then
+					b="Touch"
+				elseif ArsoniaTable.Misc.Main.Devicespoofer=="PC"then
+					b="MouseButton1"
+				elseif ArsoniaTable.Misc.Main.Devicespoofer=="XBOX"then
+					b="Gamepad1"
+				elseif ArsoniaTable.Misc.Main.Devicespoofer=="None"then
+					b="none"
+				end
+			end
 		end
     elseif tostring(method)=="LoadAnimation"then
         if tostring(a)=="Guy"then
@@ -2560,13 +2646,11 @@ mt.__namecall=newcclosure(function(a,b,c,d,e,...)
             doeshit=true
         end
         if ArsoniaTable.Aimbot.Silentaim.Enabled then
-            if ArsoniaTable.Variables.Functions.GetPos1FromRay(b)==game.Workspace.CurrentCamera.CFrame.Position then
+            if ArsoniaTable.Variables.Functions.GetPos1FromRay(b)==workspace.CurrentCamera.CFrame.Position then
                 if ArsoniaTable.Variables.__SilentAimTarget then
                     if doeshit then
-                        b=Ray.new(
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0),
-                            ArsoniaTable.Variables.__SilentAimTarget.Position-(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0))
-                        )
+                        b=Ray.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0),
+                        ArsoniaTable.Variables.__SilentAimTarget.Position-(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0)))
                     end
                 end
             end
@@ -2716,8 +2800,8 @@ coroutine.wrap(function()
     end
 end)()
 coroutine.wrap(function()
-    while game.RunService.RenderStepped:Wait()do
-		wait()
+    while wait()do
+		game.RunService.RenderStepped:Wait()
         pcall(function()
             if ArsoniaTable.Player.Movement.Bunnyhop then
                 if ArsoniaTable.Player.Movement.BunnyhopType=="Legit"then
@@ -2796,8 +2880,7 @@ coroutine.wrap(function()
     end
 end)()
 coroutine.wrap(function()
-    while game.RunService.RenderStepped:Wait() do
-		wait()
+    while wait() do
         pcall(function()
             if ArsoniaTable.Player.Anti_Aim.Enabled then
                 if ArsoniaTable.Player.Anti_Aim.FakeLag then
