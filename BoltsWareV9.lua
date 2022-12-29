@@ -6,30 +6,33 @@ game.StarterGui:SetCore("SendNotification", {
     Button1 = "OK";
 })
 
-warn("Thank you kimito for showcasing this script __ROBLOX_NOTIF__LOG")
+local oldNamecall
+oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+	local args = {...}
+    local method = getnamecallmethod()
 
-wait()
+	if not checkcaller() and tostring(self) == "UpdatePing" and tostring(method) == "FireServer" then
+		args[1] = 100
+		return oldNamecall(self, unpack(args))
+	end
 
-game.StarterGui:SetCore("SendNotification", {
-    Title = "Bolts Ware V9";
-    Text = "Kimito ima that XScripts guy (Finny) lol";
-    Button1 = "OK";
-})
-
-warn("Kimito ima that XScripts guy (Finny) lol __ROBLOX_NOTIF__LOG")
-
-local ping = 56 
-spawn(function()
-while wait(0.15) do
-    wait(0.15)
-    ping = math.random(55, 120)end end)
-spawn(function()
-    game:GetService("RunService").RenderStepped:connect(function()game.Players.LocalPlayer.Ping.Value = ping end)while wait(0.1) do local args = {
-[1] = 500,
-[2] = "LOL"
-}
-game:GetService("ReplicatedStorage").Events.UpdatePing:FireServer(unpack(args))end
+	return oldNamecall(self, ...)
 end)
+
+local ping = game.Players.LocalPlayer.Ping.Value
+
+spawn(function()
+	while wait(1) do
+		ping = math.random(56, 156)
+	end
+end)
+
+spawn(function()
+	while wait(.1) do
+		game.Players.LocalPlayer.Ping.Value = ping
+	end
+end)
+
 Library=loadstring(game:HttpGet("https://pastebin.com/raw/bfSMHFwJ"))()
 Client = {
     Modules = {ClientEnvoirment,ClientMain,},
@@ -300,7 +303,6 @@ local ArsoniaTable={
             Unpacktable=(function()local a={["\a"]="\\a",["\b"]="\\b",["\f"]="\\f",["\n"]="\\n",["\r"]="\\r",["\t"]="\\t",["\v"]="\\v",["\0"]="\\0"}local b={["and"]=true,["break"]=true,["do"]=true,["else"]=true,["elseif"]=true,["end"]=true,["false"]=true,["for"]=true,["function"]=true,["if"]=true,["in"]=true,["local"]=true,["nil"]=true,["not"]=true,["or"]=true,["repeat"]=true,["return"]=true,["then"]=true,["true"]=true,["until"]=true,["while"]=true,["continue"]=true}local c={[DockWidgetPluginGuiInfo.new]="DockWidgetPluginGuiInfo.new",[warn]="warn",[CFrame.fromMatrix]="CFrame.fromMatrix",[CFrame.fromAxisAngle]="CFrame.fromAxisAngle",[CFrame.fromOrientation]="CFrame.fromOrientation",[CFrame.fromEulerAnglesXYZ]="CFrame.fromEulerAnglesXYZ",[CFrame.Angles]="CFrame.Angles",[CFrame.fromEulerAnglesYXZ]="CFrame.fromEulerAnglesYXZ",[CFrame.new]="CFrame.new",[gcinfo]="gcinfo",[os.clock]="os.clock",[os.difftime]="os.difftime",[os.time]="os.time",[os.date]="os.date",[tick]="tick",[bit32.band]="bit32.band",[bit32.extract]="bit32.extract",[bit32.bor]="bit32.bor",[bit32.bnot]="bit32.bnot",[bit32.arshift]="bit32.arshift",[bit32.rshift]="bit32.rshift",[bit32.rrotate]="bit32.rrotate",[bit32.replace]="bit32.replace",[bit32.lshift]="bit32.lshift",[bit32.lrotate]="bit32.lrotate",[bit32.btest]="bit32.btest",[bit32.bxor]="bit32.bxor",[pairs]="pairs",[NumberSequence.new]="NumberSequence.new",[assert]="assert",[tonumber]="tonumber",[Color3.fromHSV]="Color3.fromHSV",[Color3.toHSV]="Color3.toHSV",[Color3.fromRGB]="Color3.fromRGB",[Color3.new]="Color3.new",[Delay]="Delay",[Stats]="Stats",[UserSettings]="UserSettings",[coroutine.resume]="coroutine.resume",[coroutine.yield]="coroutine.yield",[coroutine.running]="coroutine.running",[coroutine.status]="coroutine.status",[coroutine.wrap]="coroutine.wrap",[coroutine.create]="coroutine.create",[coroutine.isyieldable]="coroutine.isyieldable",[NumberRange.new]="NumberRange.new",[PhysicalProperties.new]="PhysicalProperties.new",[PluginManager]="PluginManager",[Ray.new]="Ray.new",[NumberSequenceKeypoint.new]="NumberSequenceKeypoint.new",[Version]="Version",[Vector2.new]="Vector2.new",[Instance.new]="Instance.new",[delay]="delay",[spawn]="spawn",[unpack]="unpack",[string.split]="string.split",[string.match]="string.match",[string.gmatch]="string.gmatch",[string.upper]="string.upper",[string.gsub]="string.gsub",[string.format]="string.format",[string.lower]="string.lower",[string.sub]="string.sub",[string.pack]="string.pack",[string.rep]="string.rep",[string.char]="string.char",[string.packsize]="string.packsize",[string.reverse]="string.reverse",[string.byte]="string.byte",[string.unpack]="string.unpack",[string.len]="string.len",[string.find]="string.find",[CellId.new]="CellId.new",[ypcall]="ypcall",[version]="version",[print]="print",[stats]="stats",[printidentity]="printidentity",[settings]="settings",[UDim2.fromOffset]="UDim2.fromOffset",[UDim2.fromScale]="UDim2.fromScale",[UDim2.new]="UDim2.new",[table.pack]="table.pack",[table.move]="table.move",[table.insert]="table.insert",[table.getn]="table.getn",[table.foreachi]="table.foreachi",[table.maxn]="table.maxn",[table.foreach]="table.foreach",[table.concat]="table.concat",[table.unpack]="table.unpack",[table.find]="table.find",[table.create]="table.create",[table.sort]="table.sort",[table.remove]="table.remove",[TweenInfo.new]="TweenInfo.new",[loadstring]="loadstring",[require]="require",[Vector3.FromNormalId]="Vector3.FromNormalId",[Vector3.FromAxis]="Vector3.FromAxis",[Vector3.fromAxis]="Vector3.fromAxis",[Vector3.fromNormalId]="Vector3.fromNormalId",[Vector3.new]="Vector3.new",[Vector3int16.new]="Vector3int16.new",[setmetatable]="setmetatable",[next]="next",[Wait]="Wait",[wait]="wait",[ipairs]="ipairs",[elapsedTime]="elapsedTime",[time]="time",[rawequal]="rawequal",[Vector2int16.new]="Vector2int16.new",[collectgarbage]="collectgarbage",[newproxy]="newproxy",[Spawn]="Spawn",[PluginDrag.new]="PluginDrag.new",[Region3.new]="Region3.new",[utf8.offset]="utf8.offset",[utf8.codepoint]="utf8.codepoint",[utf8.nfdnormalize]="utf8.nfdnormalize",[utf8.char]="utf8.char",[utf8.codes]="utf8.codes",[utf8.len]="utf8.len",[utf8.graphemes]="utf8.graphemes",[utf8.nfcnormalize]="utf8.nfcnormalize",[xpcall]="xpcall",[tostring]="tostring",[rawset]="rawset",[PathWaypoint.new]="PathWaypoint.new",[DateTime.fromUnixTimestamp]="DateTime.fromUnixTimestamp",[DateTime.now]="DateTime.now",[DateTime.fromIsoDate]="DateTime.fromIsoDate",[DateTime.fromUnixTimestampMillis]="DateTime.fromUnixTimestampMillis",[DateTime.fromLocalTime]="DateTime.fromLocalTime",[DateTime.fromUniversalTime]="DateTime.fromUniversalTime",[Random.new]="Random.new",[typeof]="typeof",[RaycastParams.new]="RaycastParams.new",[math.log]="math.log",[math.ldexp]="math.ldexp",[math.rad]="math.rad",[math.cosh]="math.cosh",[math.random]="math.random",[math.frexp]="math.frexp",[math.tanh]="math.tanh",[math.floor]="math.floor",[math.max]="math.max",[math.sqrt]="math.sqrt",[math.modf]="math.modf",[math.pow]="math.pow",[math.atan]="math.atan",[math.tan]="math.tan",[math.cos]="math.cos",[math.sign]="math.sign",[math.clamp]="math.clamp",[math.log10]="math.log10",[math.noise]="math.noise",[math.acos]="math.acos",[math.abs]="math.abs",[math.sinh]="math.sinh",[math.asin]="math.asin",[math.min]="math.min",[math.deg]="math.deg",[math.fmod]="math.fmod",[math.randomseed]="math.randomseed",[math.atan2]="math.atan2",[math.ceil]="math.ceil",[math.sin]="math.sin",[math.exp]="math.exp",[getfenv]="getfenv",[pcall]="pcall",[ColorSequenceKeypoint.new]="ColorSequenceKeypoint.new",[ColorSequence.new]="ColorSequence.new",[type]="type",[Region3int16.new]="Region3int16.new",[ElapsedTime]="ElapsedTime",[select]="select",[getmetatable]="getmetatable",[rawget]="rawget",[Faces.new]="Faces.new",[Rect.new]="Rect.new",[BrickColor.Blue]="BrickColor.Blue",[BrickColor.White]="BrickColor.White",[BrickColor.Yellow]="BrickColor.Yellow",[BrickColor.Red]="BrickColor.Red",[BrickColor.Gray]="BrickColor.Gray",[BrickColor.palette]="BrickColor.palette",[BrickColor.New]="BrickColor.New",[BrickColor.Black]="BrickColor.Black",[BrickColor.Green]="BrickColor.Green",[BrickColor.Random]="BrickColor.Random",[BrickColor.DarkGray]="BrickColor.DarkGray",[BrickColor.random]="BrickColor.random",[BrickColor.new]="BrickColor.new",[setfenv]="setfenv",[UDim.new]="UDim.new",[Axes.new]="Axes.new",[error]="error",[debug.traceback]="debug.traceback",[debug.profileend]="debug.profileend",[debug.profilebegin]="debug.profilebegin"}function GetHierarchy(d)local e={}local f=1;local g=d;while g do g=g.Parent;f=f+1 end;g=d;local h=0;while g do h=h+1;local i=string.gsub(g.Name,"[%c%z]",a)i=g==game and"game"or i;if b[i]or not string.match(i,"^[_%a][_%w]*$")then i='["'..i..'"]'elseif h~=f-1 then i="."..i end;e[f-h]=i;g=g.Parent end;return table.concat(e)end;local function j(k,l)if l=="string"then return string.format('"%s"',string.gsub(k,"[%c%z]",a))elseif l=="Instance"then return GetHierarchy(k)elseif type(k)~=l then return l..".new("..tostring(k)..")"elseif l=="function"then return c[k]or"'[Unknown "..(pcall(setfenv,k,getfenv(k))and"Lua"or"C").." "..tostring(k).."]'"elseif l=="userdata"then return"newproxy("..tostring(not not getmetatable(k))..")"elseif l=="thread"then return"'"..tostring(k)..", status: "..coroutine.status(k).."'"else return tostring(k)end end;local function m(n,o,p,q)o=o or{}local r=o[n]if r then return(r[1]==p[1]-1 and"'[Cyclic Parent "or"'[Cyclic ")..tostring(n)..", path: "..r[2].."]'"end;q=q or"ROOT"p=p or{0,q}local s=p[1]+1;p[1]=s;p[2]=q;o[n]=p;local t=string.rep("    ",s)local u=string.rep("    ",s-1)local v="{"local w="\n"..t;local x=true;local y=1;local z=true;for A,k in next,n do z=false;if y~=A then x=false else y=y+1 end;local B,C=typeof(A),typeof(k)local D=false;if B=="string"then A=string.gsub(A,"[%c%z]",a)if b[A]or not string.match(A,"^[_%a][_%w]*$")then D=true;A=string.format('["%s"]',A)end else D=true;A="["..(B=="table"and string.gsub(m(A,o,{s,q}),"^%s*(.-)%s*$","%1")or j(A,B)).."]"end;k=C=="table"and m(k,o,{s,q},q..(D and""or".")..A)or j(k,C)v=v..w..(x and k or A.." = "..k)..","end;return z and v.."}"or string.sub(v,1,-2).."\n"..u.."}"end;return m end)(),
             Shakecam=getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).ShakeCam,
             Getammo=require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).getammo,
-            CalculateSpread=require(game:GetService("ReplicatedStorage").Modules.Spread).calcspread,
             SummonBaseBall=function(a,b)a=(function()local baseballs={}for _,v in pairs(game.ReplicatedStorage.Weapons:GetChildren())do if v:FindFirstChild("Projectile")then if v.Projectile:FindFirstChild("Baseball")then table.insert(baseballs,v.Name)end end end local baseballnames={["Baseball Launcher"]="Baseball",Superball="Superball",Slingshot="Rock",Ornament="Ornament",Ultraball="Yogaball",["Water Balloon"]="Water Balloon",PIZZA="Pizza Slice",Spellbook="Fireball",Snowball="Snowball",Presents="Present",["Ice Stars"]="Ninja Star",["Paintball Gun"]="Paintball",Dispenser="Pez",["TP Launcher"]="Toliet Paper",["Flaming Pumpkin"]="Molotov",["Trash Can"]="Trash Can",["Cone Launcher"]="Ice Cream Cone",}local getfullbaseballnames={}for _,v in pairs(baseballs)do if baseballnames[v]then table.insert(getfullbaseballnames,baseballnames[v])else table.insert(getfullbaseballnames,v)end end local getfullbaseballnameswith={}for _,v in pairs(baseballs)do if baseballnames[v]then getfullbaseballnameswith[baseballnames[v]]=v else getfullbaseballnameswith[v]=v end end return getfullbaseballnameswith end)()[a]or a require(game.ReplicatedStorage.Modules.ClientFunctions).CreateProjectile(game.Players.LocalPlayer.Name,"Baseball",b,game.Workspace.CurrentCamera.CFrame.Position+game.Workspace.CurrentCamera.CFrame.LookVector*500,CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0)),45,0,0,0,a,game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0),false,{},1)game:GetService("ReplicatedStorage").Events.ReplicateProjectile:FireServer({"Baseball",b,game.Workspace.CurrentCamera.CFrame.Position+game.Workspace.CurrentCamera.CFrame.LookVector*500,CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0)),45,0,0,0,a,game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0),false,{},1})end,
             IsRoundOver=function()if game.ReplicatedStorage.wkspc.Status.RoundOver.Value or game.ReplicatedStorage.wkspc.Status.Preparation.Value then return true end return false end,
         },
@@ -1016,7 +1018,7 @@ function Funcs:AddEsp(player)
     local LeftLowerLeftUpper = Funcs:DrawLine()
     local LowerTorsoRightUpper = Funcs:DrawLine()
     local RightLowerRightUpper = Funcs:DrawLine()
-    Services.RunService.Stepped:Connect(
+    Services.RunService.RenderStepped:Connect(
         function()
             if Funcs:IsAlive(player) and player.Character:FindFirstChild("HumanoidRootPart") and Config.Visuals.Enabled then
                 local RootPosition, OnScreen =
@@ -1447,13 +1449,13 @@ MiscTabMainSection:Toggle("Enable Misc",function(x)
     ArsoniaTable.Misc.Main.Enabled=x
     if not x then
         if ArsoniaTable.Misc.Main.Devicespoofer=="Mobile"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Touch", "bro")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Touch", "damn")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="PC"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("MouseButton1", "bro")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("MouseButton1", "damn")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="XBOX"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Gamepad1", "bro")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Gamepad1", "damn")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="None"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("none", "bro")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("none", "damn")
         end
         game:GetService("ReplicatedStorage").wkspc.CurrentCurse.Value=ArsoniaTable.Misc.Main.Curse
     end
@@ -1477,13 +1479,13 @@ MiscTabMainSection:Dropdown("Device Spoofer",{"PC","Mobile","XBOX","None"},funct
     ArsoniaTable.Misc.Main.Devicespoofer=x
     if ArsoniaTable.Misc.Main.Enabled then
         if ArsoniaTable.Misc.Main.Devicespoofer=="Mobile"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Touch", "bro")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Touch", "damn")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="PC"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("MouseButton1", "bro")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("MouseButton1", "damn")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="XBOX"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Gamepad1", "bro")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("Gamepad1", "damn")
         elseif ArsoniaTable.Misc.Main.Devicespoofer=="None"then
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("none", "bro")
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer("none", "damn")
         end
     end
 end)
@@ -1491,20 +1493,15 @@ MiscTabMainSection:Toggle("Chat Spam",function(state)
     Client.Toggles.SpamChat = state
 end)
 spawn(function()
-    while wait(.01) do
-        if Client.Toggles.SpamChat == true then
-        local A_1 = "Hah!"
-local A_2 = Client.Values.ChatMsg
-local A_3 = false
-local Event = game:GetService("ReplicatedStorage").Events.PlayerChatted
-Event:FireServer(A_1, A_2, A_3, false, true)
-        wait(0.1)
+    while wait(0.2) do
+        if Client.Toggles.SpamChat then
+			game.ReplicatedStorage.Events.PlayerChatted:FireServer("Hah!", Client.Values.ChatMsg, false, false, true)
         end
     end
 end)
 MiscTabMainSection:Textbox("Custom Chat Message","Bolts Ware V9 On Top",function(x)
-		Client.Values.ChatMsg = tostring(x)
-	end)
+	Client.Values.ChatMsg = tostring(x)
+end)
 MiscTabMainSection:Dropdown("Curse",ArsoniaTable.Variables.Curses,function(x)
     ArsoniaTable.Misc.Main.Curse=x
     if ArsoniaTable.Misc.Main.Enabled then
@@ -1576,79 +1573,77 @@ MiscTabTrollingSection:Toggle("Auto Player Surf",function(x)
     ArsoniaTable.Misc.Trolling.PlayerSurf=x
 end)
 MiscTabTrollingSection:Toggle("Bananas Autofarm",function(Enabled)
-    _G.BananaAutoFarm = Enabled
-while _G.BananaAutoFarm do wait(0.1)
-pcall(function()
-        if game.Players.LocalPlayer.Character then
-            local lastcfpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-                    for _,v in pairs(game.Workspace.Debris.Bananas:GetChildren())do
-                        if v.Name=="Banana"then
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-                            v.Transparency= 0.1
-                            repeat wait() until v.Parent == nil or wait(0.1)
-                        end
-                end
-            end
-    end)
-end
+    getgenv().BananaAutoFarm = Enabled
+	while getgenv().BananaAutoFarm do wait(0.1)
+		if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+			local lastcfpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+			for _,v in next, game.Workspace.Debris.Bananas:GetChildren() do
+				if v.Name:lower()=="banana" then
+					v.Transparency = 1
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+				end
+			end
+		end
+	end
 end)
 MiscTabTrollingSection:Toggle("FE Cool Sunglasses",function(x)
-    getgenv().innoisgay = x
-    while getgenv().innoisgay do wait(0.1) game:GetService("ReplicatedStorage").Events.Sunglasses:FireServer() end
+    getgenv().Sunglasses = x
+    while getgenv().Sunglasses do wait(0.1) game:GetService("ReplicatedStorage").Events.Sunglasses:FireServer() end
 end)
 MiscTabTrollingSection:Button("FE Rectangle Must Have Monky",function()
-game.Players.LocalPlayer.Character["Banana Bod"].Handle.SpecialMesh:Destroy()
-game.Players.LocalPlayer.Character["Banana Bod"].Handle.Decal:Destroy()
-game:GetService("Players").LocalPlayer.Data.Skin.Value = "Nonexisty"
+	pcall(function()
+		game.Players.LocalPlayer.Character["Banana Bod"].Handle.SpecialMesh:Destroy()
+		game.Players.LocalPlayer.Character["Banana Bod"].Handle.Decal:Destroy()
+		game:GetService("Players").LocalPlayer.Data.Skin.Value = "Nonexisty"
+	end)
 end)
 MiscTabTrollingSection:Button("Remove Unusual On Hoilday Pilot",function()
     while game.Players.LocalPlayer.Character.Head:FindFirstChild("Unusual") do
-  game.Players.LocalPlayer.Character.Head.Unusual:Destroy()
-end
+  		game.Players.LocalPlayer.Character.Head.Unusual:Destroy()
+		wait()
+	end
 end)
 MiscTabTrollingSection:Button("FE KillBrick",function()
-local Core = getsenv(game.Players.LocalPlayer.PlayerGui.Menew.LocalScript)
-local Loadout
-for _,v in pairs(getupvalues(Core.ViewItems)) do
-    if typeof(v) == "table" then
-        if v.Skins then
-            Loadout = v
-        end
-    end
-end
-table.insert(Loadout.Skins, "KillBrick");
-game.Players.LocalPlayer.Data.Skin.Value = "KillBrick"
-game.Players.LocalPlayer.Character.LeftLowerArm:Destroy()
-game.Players.LocalPlayer.Character.LeftUpperArm:Destroy()
-game.Players.LocalPlayer.Character.RightLowerArm:Destroy()
-game.Players.LocalPlayer.Character.RightUpperArm:Destroy()
-game.Players.LocalPlayer.Character.LeftFoot:Destroy()
-game.Players.LocalPlayer.Character.LeftLowerLeg:Destroy()
-game.Players.LocalPlayer.Character.LeftUpperLeg:Destroy()
-game.Players.LocalPlayer.Character.RightFoot:Destroy()
-game.Players.LocalPlayer.Character.RightLowerLeg:Destroy()
-game.Players.LocalPlayer.Character.RightUpperLeg:Destroy()
-game.Players.LocalPlayer.Character.FakeHead:Destroy()
-local esc = game.Players.LocalPlayer.Character.UpperTorso:GetChildren()
-for i, v in pairs(esc) do
-    v:Destroy()
-    --wait()
-end
+	local Core = getsenv(game.Players.LocalPlayer.PlayerGui.Menew.LocalScript)
+	local Loadout
+	for _,v in pairs(getupvalues(Core.ViewItems)) do
+		if typeof(v) == "table" then
+			if v.Skins then
+				Loadout = v
+			end
+		end
+	end
+	table.insert(Loadout.Skins, "KillBrick");
+	game.Players.LocalPlayer.Data.Skin.Value = "KillBrick"
+	game.Players.LocalPlayer.Character.LeftLowerArm:Destroy()
+	game.Players.LocalPlayer.Character.LeftUpperArm:Destroy()
+	game.Players.LocalPlayer.Character.RightLowerArm:Destroy()
+	game.Players.LocalPlayer.Character.RightUpperArm:Destroy()
+	game.Players.LocalPlayer.Character.LeftFoot:Destroy()
+	game.Players.LocalPlayer.Character.LeftLowerLeg:Destroy()
+	game.Players.LocalPlayer.Character.LeftUpperLeg:Destroy()
+	game.Players.LocalPlayer.Character.RightFoot:Destroy()
+	game.Players.LocalPlayer.Character.RightLowerLeg:Destroy()
+	game.Players.LocalPlayer.Character.RightUpperLeg:Destroy()
+	game.Players.LocalPlayer.Character.FakeHead:Destroy()
+	for _, v in next, game.Players.LocalPlayer.Character.UpperTorso:GetChildren() do
+		v:Destroy()
+	end
 end)
 MiscTabTrollingSection:Button("FE Headless",function() 
-if game.Players.LocalPlayer.Character:FindFirstChild("HeadHB")then
-            game.Players.LocalPlayer.Character:FindFirstChild("HeadHB"):Destroy()
-        end
-        if game.Players.LocalPlayer.Character:FindFirstChild("FakeHead")then
-            game.Players.LocalPlayer.Character:FindFirstChild("FakeHead"):Destroy()
-        end
+	if game.Players.LocalPlayer.Character:FindFirstChild("HeadHB") then
+        game.Players.LocalPlayer.Character.HeadHB:Destroy()
+    end
+    if game.Players.LocalPlayer.Character:FindFirstChild("FakeHead")then
+        game.Players.LocalPlayer.Character.FakeHead:Destroy()
+    end
 end)
 MiscTabTrollingSection:Button("Free Badge",function()
-game:GetService("ReplicatedStorage").Events.ReplicateGear2:FireServer("coffee")
+	game.ReplicatedStorage.Events.ReplicateGear2:FireServer("coffee")
 end) 
 MiscTabTrollingSection:Button("Reedem Codes",function()
     local args = {[1] = "BLOXY" }
-    game:GetService("ReplicatedStorage").Redeem:InvokeServer(unpack(args)) wait(1)
+    game:GetService("ReplicatedStorage").Redeem:InvokeServer(unpack(args)) wait()
     local args = {[1] = "pog"}
     game:GetService("ReplicatedStorage").Redeem:InvokeServer(unpack(args))
 end)
@@ -1681,7 +1676,7 @@ MiscTabSaveSection:Button("Load",function()
         "Bolts Slave/Hooker",
         "Loadded: "..a.." Features With "..b.." Errors",
         _G.UIMainColor or Color3.fromRGB(255,0,0),
-        Color3.new(255,0,0), .01)
+    Color3.new(255,0,0), .01)
 end)
 local MiscTabSaveSection=MiscTab:Section("Configs 2")
 MiscTabSaveSection:Button("Save",function()
@@ -1753,9 +1748,8 @@ local E=Window:Tab("Info")
 local W=E:Section("Info")
 W:Button("Press RightShift To Toggle GUI",function()
 end)
-W:Button("Inno is pretty :) (Edited By Finny)",function()
-end)
-W:Button("Kimito is cool",function()
+W:Button("print 'hello world'",function()
+	print('hello world')
 end)
 W:Button("Copy discord link",function()
     setclipboard("https://discord.gg/zbnGJU6Att")
@@ -1769,7 +1763,7 @@ W:Button("The3Bakers - Helper",function()
 end)
 W:Button("Storm - Co Owner",function()
 end)
-W:Button("Finny - Remote Protector",function()
+W:Button("i mean",function()
 end)
 W:Button("Lolcat - Helper",function()
 end)
@@ -1903,7 +1897,7 @@ game.RunService.RenderStepped:Connect(function()
                         table.insert(Ignore,game.Workspace.Map.Clips)
                     end
                 end
-                for _,v in pairs(game.Players:GetChildren())do
+                for _,v in next, game.Players:GetChildren() do
                     if v.Character then
                         table.insert(Ignore,v.Character)
                     end
@@ -2117,7 +2111,7 @@ game.RunService.RenderStepped:Connect(function()
         end
     end
 end)
-game.RunService.RenderStepped:Connect(function()
+game.RunService.Stepped:Connect(function()
     if ArsoniaTable.Player.Misc.Enabled then
         if ArsoniaTable.Player.Misc.Slidewalk then
             for _,v in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks())do
@@ -2136,17 +2130,12 @@ game.RunService.RenderStepped:Connect(function()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.Bleed:Destroy()
             end
         end
-        if ArsoniaTable.Player.Misc.AntiFling then
-            if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("WindEffect")then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.WindEffect:Destroy()
-            end
-        end
         if ArsoniaTable.Player.Misc.FastHeal then
             if game.Players.LocalPlayer.NRPBS.Health.Value<=99 then
                 for _,v in pairs(game.Workspace.Debris:GetChildren())do
                     if v.Name=="DeadHP"then
+						v.Transparency=1
                         v.CFrame=game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-                        v.Transparency=1
                     end
                 end
             end
@@ -2174,7 +2163,7 @@ game.RunService.RenderStepped:Connect(function()
         end
         if ArsoniaTable.Player.Misc.Removegun then
             if game.Players.LocalPlayer.Character:FindFirstChild("Gun")then
-                for _,v in pairs(game.Players.LocalPlayer.Character.Gun:GetDescendants())do
+                for _,v in pairs(game.Players.LocalPlayer.Character.Gun:GetChildren()) do
                     if v:IsA("BasePart")then
                         if v.Transparency~=1 then
                             v:Destroy()
@@ -2473,7 +2462,7 @@ game.RunService.RenderStepped:Connect(function()
         end
         if ArsoniaTable.Combat.Gunmods.Autospool then
             if tostring(game:GetService("Players").LocalPlayer.PlayerGui.GUI.Client.Variables.gun.Value)=="Minigun"then
-                game:GetService("Players").LocalPlayer.PlayerGui.GUI.Client.Variables.Held2.Value=true
+                game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.Held2.Value=true
             end
         end
         if ArsoniaTable.Combat.Gunmods.Infcharge then
@@ -2481,6 +2470,7 @@ game.RunService.RenderStepped:Connect(function()
         end
     end
 end)
+devicesLol={"Touch","MouseButton1","Gamepad1","none"}
 game.RunService.RenderStepped:Connect(function()
     if ArsoniaTable.Misc.Main.Enabled then
         if ArsoniaTable.Misc.Main.Antimonkey then
@@ -2509,15 +2499,9 @@ game.RunService.RenderStepped:Connect(function()
             end
         end
         if ArsoniaTable.Misc.Main.Devicespoofer=="Wii Steering Wheel"then
-            local a={"Touch","MouseButton1","Gamepad1","none"}
-            game.ReplicatedStorage.Events.CoolNewRemote:FireServer(a[math.random(1,#a)], "bro")
-        end
-        if ArsoniaTable.Misc.Main.Pingspoofer=="Random"then
-            local a={0,.25,.5}
-            game.ReplicatedStorage.Events.UpdatePing:FireServer(a[math.random(1,#a)])
+            game.ReplicatedStorage.Events.CoolNewRemote:FireServer(devicesLol[math.random(1,#devicesLol)], "damn")
         end
         if ArsoniaTable.Misc.Main.Fastrespawn then
-            wait(0.6)
             getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client).reviveme=true
         end
         if ArsoniaTable.Misc.Main.Antiteamleader then
@@ -2529,13 +2513,6 @@ game.RunService.RenderStepped:Connect(function()
 end)
 game.RunService.RenderStepped:Connect(function()
     if ArsoniaTable.Misc.Trolling.Enabled then
-        if ArsoniaTable.Misc.Trolling.Deleteball then
-            if tostring(game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.gun.Value)=="OddBall"then
-                game:GetService("ReplicatedStorage").Events.ThrowBall:FireServer(
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.Position,
-                    Vector3.new(0,-math.huge,0))
-            end
-        end
         if ArsoniaTable.Misc.Trolling.PlayerSurf then
             local Raycock=Ray.new(
                 game.Players.LocalPlayer.Character.HumanoidRootPart.Position,
@@ -2647,7 +2624,16 @@ mt.__namecall=newcclosure(function(a,b,c,d,e,...)
                     end
                 end
             end
-        end
+		elseif tostring(a)=="ReplicateProjectile"then
+            if ArsoniaTable.Aimbot.Silentaim.Enabled then
+                if ArsoniaTable.Variables.__SilentAimTarget then
+                    if ArsoniaTable.Aimbot.Silentaim.Hitchance>=math.random(1,100)then
+                        c=ArsoniaTable.Variables.__SilentAimTarget.Position
+                        d=CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1.5+game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0))
+                    end
+                end
+            end
+		end
     elseif tostring(method)=="LoadAnimation"then
         if tostring(a)=="Guy"then
             if ArsoniaTable.Combat.Gunmods.Enabled then
@@ -2955,12 +2941,11 @@ coroutine.wrap(function()
 end)()
 coroutine.wrap(function()
     while game.RunService.RenderStepped:Wait() do
-		wait(.001)
         pcall(function()
             if ArsoniaTable.Aimbot.Silentaim.Enabled then
                 if not game.Players.LocalPlayer.PlayerGui.GUI.Client.Variables.equipping.Value then
                     if ArsoniaTable.Aimbot.Silentaim.AutoshootMethod=="Force Fire"then
-                        if ArsoniaTable.Variables.__SilentAimTarget then require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).firebullet() task.wait(.04) end
+                        if ArsoniaTable.Variables.__SilentAimTarget then require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.Weapons).firebullet() wait() end
                     end
                 end
             end
@@ -2999,7 +2984,7 @@ coroutine.wrap(function()
     end
 end)()
 coroutine.wrap(function()
-    while game.RunService.RenderStepped:Wait()do
+    while game.RunService.RenderStepped:Wait() do
 		wait()
         pcall(function()
             if ArsoniaTable.Player.Anti_Aim.Enabled then
@@ -3066,15 +3051,6 @@ coroutine.wrap(function()
         end)
     end
 end)()
-require(game.Players.LocalPlayer.PlayerGui.GUI.Client.Functions.General).applyvelocity=function(...)
-    if ArsoniaTable.Player.Misc.Enabled then
-        if ArsoniaTable.Player.Misc.AntiFling then
-            local args={...}
-            if args[5]~=game.Players.LocalPlayer.Name then return end
-        end
-    end
-    return ArsoniaTable.Variables.Functions.OldApplyVelocity(...)
-end
 getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client).flamemoment.doflame=function(a,b,...)
     if ArsoniaTable.Aimbot.Silentaim.Enabled then
         if ArsoniaTable.Variables.__SilentAimTarget then
@@ -3084,10 +3060,6 @@ getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Client).flamemoment.doflame=funct
         end
     end
     return ArsoniaTable.Variables.Functions.DoFlame(a,b,...)
-end
-require(game.ReplicatedStorage.Modules.Spread).calcspread=function(a,...)
-    if ArsoniaTable.Combat.Gunmods.Enabled then if ArsoniaTable.Combat.Gunmods.Removespread then a=0 end end
-    return ArsoniaTable.Variables.Functions.CalculateSpread(a,...)
 end
 ArsoniaTable.Variables.Levels.StartBar=ArsoniaTable.Variables.Levels_OLD.StartBar --Fix
 ArsoniaTable.Variables.Levels.EndBar=ArsoniaTable.Variables.Levels_OLD.EndBar --Fix
