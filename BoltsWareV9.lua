@@ -1,3 +1,4 @@
+
 --Made By Bolts And The3Bakers and tysm to Andrew for undetection once again!
 
 if getgenv().BoltsWareV10 then return print("no.") end
@@ -193,7 +194,6 @@ local ArsoniaTable={
             AutoshootMethod="None",
             Target="HeadHB",
             Onlytarget=false,
-            Fakelock=false,
         },
         Backtrack={
             Enabled=false,
@@ -293,7 +293,7 @@ local ArsoniaTable={
         CamAngles=0,
     },
 }
-local name="Bolts Ware v10 - Undetected - "..identifyexecutor()..""
+local name="Bolts Ware v10 - Fully Undetected - "..identifyexecutor()..""
 local Window=Library:Window(name,Color3.fromRGB(196, 0, 255),700,Color3.fromRGB(196, 0, 255),700)
 local CombatTab=Window:Tab("Combat")
 local CombatTabMainSection=CombatTab:Section("Aimbot")
@@ -352,8 +352,7 @@ killAllRenderStepped = game:GetService("RunService").RenderStepped:Connect(funct
 			workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position, PlayerLocked.Character.HeadHB.Position)
 			if Back then num = 2 up = 0 else num = -2 up = 2 end
 			game:GetService("Players").LocalPlayer.Character:SetPrimaryPartCFrame(
-				PlayerLocked.Character.HumanoidRootPart.CFrame * CFrame.new(-1.0, up, num)
-			)
+			PlayerLocked.Character.HumanoidRootPart.CFrame * CFrame.new(-1.0, up, num))
 			local RayParams = RaycastParams.new()
 			RayParams.FilterType = Enum.RaycastFilterType.Blacklist
 			RayParams.FilterDescendantsInstances = {workspace.CurrentCamera, game:GetService("Players").LocalPlayer.Character, workspace.Map.Ignore, workspace.Map.Clips}
@@ -378,14 +377,14 @@ end)
 CombatTabMainSection:Toggle("Silent Aim",function(x)
     ArsoniaTable.Aimbot.Silentaim.Enabled=x
 end)
-_G.aimbot = false
+getgenv().aimbot = false
 function closestplayer()
     local dist = math.huge
     local target = nil
     local localplayer = game.Players.LocalPlayer
 	for _,v in next, (game:GetService("Players"):GetPlayers()) do
 		if v ~= localplayer then
-			if v.Character and v.Character:FindFirstChild("Head") and v.TeamColor ~= localplayer.TeamColor and _G.aimbot and v.Character.Humanoid.Health > 0 then --- creating the checks
+			if v.Character and v.Character:FindFirstChild("Head") and v.TeamColor ~= localplayer.TeamColor and getgenv().aimbot and v.Character.Humanoid.Health > 0 then --- creating the checks
     			local magnitude = (v.Character.Head.Position - localplayer.Character.Head.Position).magnitude
 				if magnitude < dist then
 					dist = magnitude
@@ -409,13 +408,13 @@ UIS.InputEnded:Connect(function(inp)
 	end
 end)
 CombatTabMainSection:Toggle("Aimlock",function(x)
-    _G.aimbot = x
+    getgenv().aimbot = x
 end)
 local camera = workspace.CurrentCamera
 spawn(function()
 game:GetService("RunService").RenderStepped:Connect(function()
     wait(0.01)
-	if aiming and _G.aimbot then
+	if aiming and getgenv().aimbot then
 		camera.CFrame = CFrame.new(camera.CFrame.Position,closestplayer().Character.Head.Position)
 	end
 end)
@@ -510,7 +509,7 @@ end)
 local circ=Drawing.new("Circle")
 circ.Visible=false
 circ.Position=game:GetService('UserInputService'):GetMouseLocation()
-circ.Color = Color3.new(196, 0, 255)
+circ.Color=Color3.new(196, 0, 255)
 circ.Thickness=2
 circ.Transparency=1
 circ.NumSides=50
@@ -539,7 +538,7 @@ local CombatTabGunmodsSection=CombatTab:Section("Gunmods")
 CombatTabGunmodsSection:Toggle("Enable Gun Mods",function(x)
     ArsoniaTable.Combat.Gunmods.Enabled=x
     if x then
-        for _,v in next, (game.ReplicatedStorage.Weapons:GetChildren())do
+        for _,v in next, game.ReplicatedStorage.Weapons:GetChildren() do
             if v:FindFirstChild("FireRate")then
                 v.ArsoniaFireRate.Value=v.FireRate.Value-ArsoniaTable.Combat.Gunmods.Firerate
             end
@@ -574,14 +573,14 @@ CombatTabGunmodsSection:Toggle("Enable Gun Mods",function(x)
             end
         end
     else
-        for _,v in next, (game.ReplicatedStorage.Weapons:GetChildren())do
+        for _,v in next, game.ReplicatedStorage.Weapons:GetChildren() do
             if v:FindFirstChild("FireRate")then
                 v.ArsoniaFireRate.Value=v.FireRate.Value
             end
             if v:FindFirstChild("StoredAmmo")then
                 v.ArsoniaStoredAmmo.Value=v.StoredAmmo.Value
             end
-            if v:FindFirstChild("Range")and v:FindFirstChild("Melee")and v:FindFirstChild("Backstab")then
+            if v:FindFirstChild("Range") and v:FindFirstChild("Melee") and v:FindFirstChild("Backstab")then
                 v.Range.Value=v.ArsoniaRange.Value
             end
             if v:FindFirstChild("ReloadTime")then
@@ -656,7 +655,7 @@ CombatTabGunmodsSection:Toggle("Instant Reload",function(x)
     ArsoniaTable.Combat.Gunmods.Instantreload=x
     if ArsoniaTable.Combat.Gunmods.Enabled then
         if x then
-            for _,v in next, (game.ReplicatedStorage.Weapons:GetChildren())do
+            for _,v in next, game.ReplicatedStorage.Weapons:GetChildren() do
                 if v:FindFirstChild("ReloadTime")then
                     v.ArsoniaReloadTime.Value=0
                 end
@@ -668,14 +667,13 @@ CombatTabGunmodsSection:Toggle("Instant Reload",function(x)
                 end
             end
         else
-            for _,v in next, (game.ReplicatedStorage.Weapons:GetChildren())do
+            for _,v in next, game.ReplicatedStorage.Weapons:GetChildren() do
                 if v:FindFirstChild("ReloadTime")then
                     v.ArsoniaReloadTime.Value=v.ReloadTime.Value
                 end
                 if v:FindFirstChild("EReloadTime")then
                     v.ArsoniaEReloadTime.Value=v.EReloadTime.Value
                 end
-                
                 if v:FindFirstChild("NotPumpAction")then
                     v.NotPumpAction.Name="PumpAction"
                 end
@@ -690,13 +688,13 @@ CombatTabGunmodsSection:Toggle("Instant Equip",function(x)
     ArsoniaTable.Combat.Gunmods.Instantequip=x
     if ArsoniaTable.Combat.Gunmods.Enabled then
         if x then
-            for _,v in next, (game.ReplicatedStorage.Weapons:GetChildren())do
+            for _,v in next, game.ReplicatedStorage.Weapons:GetChildren() do
                 if v:FindFirstChild("EquipTime")then
                     v.ArsoniaEquipTime.Value=0
                 end
             end
         else
-            for _,v in next, (game.ReplicatedStorage.Weapons:GetChildren())do
+            for _,v in next, game.ReplicatedStorage.Weapons:GetChildren() do
                 if v:FindFirstChild("EquipTime")then
                     v.ArsoniaEquipTime.Value=v.EquipTime.Value
                 end
@@ -1264,16 +1262,16 @@ VisualsTabViewmodelSection:ToggleSlider("Arm Chams",255,9,5,function(x,y)
     ArsoniaTable.Visuals.Viewmodel.Armchams=x
     ArsoniaTable.Visuals.Viewmodel.ArmchamsTrans=y/10
     if game.Workspace.CurrentCamera:FindFirstChild("Arms")then
-        if game.Workspace.CurrentCamera.Arms.CSSArms:FindFirstChild("AnalSex")then
-            game.Workspace.CurrentCamera.Arms.CSSArms.AnalSex:Destroy()
+        if game.Workspace.CurrentCamera.Arms.CSSArms:FindFirstChild("Armchams")then
+            game.Workspace.CurrentCamera.Arms.CSSArms.Armchams:Destroy()
         end
     end
 end)
 VisualsTabViewmodelSection:Color("Color",Color3.fromRGB(196, 0, 255),function(x)
     ArsoniaTable.Visuals.Viewmodel.ArmchamsCol=x
     if game.Workspace.CurrentCamera:FindFirstChild("Arms")then
-        if game.Workspace.CurrentCamera.Arms.CSSArms:FindFirstChild("AnalSex")then
-            game.Workspace.CurrentCamera.Arms.CSSArms.AnalSex:Destroy()
+        if game.Workspace.CurrentCamera.Arms.CSSArms:FindFirstChild("Armchams")then
+            game.Workspace.CurrentCamera.Arms.CSSArms.Armchams:Destroy()
         end
     end
 end)
@@ -1351,13 +1349,13 @@ VisualsTabMainSection:Toggle("Enable Misc",function(x)
                 v.BackgroundColor3=game:GetService("Players").LocalPlayer.PlayerGui.GUI.Crosshairs.Crosshair.Center1.BackgroundColor3
             end
         end
-        if game.Workspace:FindFirstChild("Map")then
-            if game.Workspace.Map:FindFirstChild("Xcum")then
-                game.Workspace.Map.Xcum:Destroy()
-                for _,v in next, (game.Workspace.Map:GetDescendants())do
-                    if v:IsA("BasePart")then
-                        if v:FindFirstChild("Transcock")then
-                            v.Transparency=v.Transcock.Value
+        if workspace:FindFirstChild("Map")then
+            if workspace.Map:FindFirstChild("Xray")then
+                workspace.Map.Xray:Destroy()
+                for _,v in next, workspace.Map:GetDescendants() do
+                    if v:IsA("BasePart") then
+                        if v:FindFirstChild("XrayTransparency") then
+                            v.Transparency=v.XrayTransparency.Value
                         end
                     end
                 end
@@ -1377,12 +1375,12 @@ VisualsTabMainSection:ToggleSlider("X-Ray",0,10,5,function(x,y)
     ArsoniaTable.Visuals.Main.XrayTrans=y/10
     if not x then
         if game.Workspace:FindFirstChild("Map")then
-            if game.Workspace.Map:FindFirstChild("Xcum")then
-                game.Workspace.Map.Xcum:Destroy()
-                for _,v in next, (game.Workspace.Map:GetDescendants())do
+            if game.Workspace.Map:FindFirstChild("Xray")then
+                game.Workspace.Map.Xray:Destroy()
+                for _,v in next, game.Workspace.Map:GetDescendants() do
                     if v:IsA("BasePart")then
-                        if v:FindFirstChild("Transcock")then
-                            v.Transparency=v.Transcock.Value
+                        if v:FindFirstChild("XrayTransparency")then
+                            v.Transparency=v.XrayTransparency.Value
                         end
                     end
                 end
@@ -1390,12 +1388,12 @@ VisualsTabMainSection:ToggleSlider("X-Ray",0,10,5,function(x,y)
         end
     elseif ArsoniaTable.Visuals.Main.Enabled then
         if game.Workspace:FindFirstChild("Map")then
-            if game.Workspace.Map:FindFirstChild("Xcum")then
-                game.Workspace.Map.Xcum:Destroy()
-                for _,v in next, (game.Workspace.Map:GetDescendants())do
+            if game.Workspace.Map:FindFirstChild("Xray")then
+                game.Workspace.Map.Xray:Destroy()
+                for _,v in next, game.Workspace.Map:GetDescendants() do
                     if v:IsA("BasePart")then
-                        if v:FindFirstChild("Transcock")then
-                            v.Transparency=v.Transcock.Value
+                        if v:FindFirstChild("XrayTransparency")then
+                            v.Transparency=v.XrayTransparency.Value
                         end
                     end
                 end
@@ -1424,7 +1422,7 @@ MiscTabMainSection:Toggle("Enable Misc",function(x)
     end
 end)
 MiscTabMainSection:Toggle("Fast Respawn",function(x)
-        ArsoniaTable.Misc.Main.Fastrespawn=x
+    ArsoniaTable.Misc.Main.Fastrespawn=x
 end)
 MiscTabMainSection:Toggle("Anti Team Leader Effect",function(x)
     ArsoniaTable.Misc.Main.Antiteamleader=x
@@ -1459,7 +1457,7 @@ MiscTabMainSection:Toggle("Chat Spam (chat first for less ban risk)",function(st
     Client.Toggles.SpamChat = state
 end)
 spawn(function()
-    while wait(0.2) do
+    while wait(0.15) do
 		if game.Players.LocalPlayer.Status.Team.Value~="Spectator" then
 			if Client.Toggles.SpamChat and chatThing5 == "rgeqr354t34th3uh3uh385h8h385h385yh3" then
 				game.ReplicatedStorage.Events.PlayerChatted:FireServer(chatThing, Client.Values.ChatMsg, chatThing2, chatThing3, chatThing4)
@@ -1645,7 +1643,7 @@ MiscTabSaveSection:Button("Load",function()
     getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
         "Bolts Slave/Hooker",
         "Loadded: "..a.." Features With "..b.." Errors",
-        _G.UIMainColor or Color3.fromRGB(255,0,0),
+        getgenv().UIMainColor or Color3.fromRGB(255,0,0),
     Color3.new(255,0,0), .01)
 end)
 local MiscTabSaveSection=MiscTab:Section("Configs 2")
@@ -1676,7 +1674,7 @@ MiscTabSaveSection:Button("Load",function()
     getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
         "Bolts Slave/Hooker",
         "Loadded: "..a.." Features With "..b.." Errors",
-        _G.UIMainColor or Color3.fromRGB(255,0,0),
+        getgenv().UIMainColor or Color3.fromRGB(255,0,0),
         Color3.new(255,0,0),
         .01
     )
@@ -1709,7 +1707,7 @@ MiscTabSaveSection:Button("Load",function()
     getsenv(game.Players.LocalPlayer.PlayerGui.GUI.Main.Chats.DisplayChat).createNewMessage(
         "Bolts Slave/Hooker",
         "Loadded: "..a.." Features With "..b.." Errors",
-        _G.UIMainColor or Color3.fromRGB(255,0,0),
+        getgenv().UIMainColor or Color3.fromRGB(255,0,0),
         Color3.new(255,0,0),
         .01
     )
@@ -2006,15 +2004,6 @@ spawn(function()
 						end
 					end
 				end
-				if ArsoniaTable.Aimbot.Silentaim.Enabled then
-					if ArsoniaTable.Aimbot.Silentaim.Fakelock then
-						if ArsoniaTable.Variables.__SilentAimTarget then
-							game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=
-							CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)*
-							CFrame.Angles(0,ArsoniaTable.Variables.EngluarFix.Y,0)
-						end
-					end
-				end
 				if ArsoniaTable.Player.Anti_Aim.Upsidedown and not ArsoniaTable.Variables.IsFall then
 					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=
 					CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)*
@@ -2185,25 +2174,11 @@ spawn(function()
 				end
 			end
 			ArsoniaTable.Variables.__SilentAimTarget=a
-			if ArsoniaTable.Aimbot.Silentaim.Fakelock then
-				ArsoniaTable.Variables.EngluarFix=nil
-				if ArsoniaTable.Variables.__SilentAimTarget then
-					ArsoniaTable.Variables.EngluarFix=Vector3.new(CFrame.new(game.Players.LocalPlayer.Character.Head.Position,ArsoniaTable.Variables.__SilentAimTarget.Position):ToEulerAnglesYXZ())
-					if not ArsoniaTable.Player.Anti_Aim.Enabled then
-						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=
-						CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)*
-						CFrame.Angles(0,ArsoniaTable.Variables.EngluarFix.Y,0)
-					end
-				end
-			end
 		end
 		if ArsoniaTable.Misc.Trolling.Enabled then
 			if ArsoniaTable.Misc.Trolling.PlayerSurf then
-				local Raycock=Ray.new(
-					game.Players.LocalPlayer.Character.HumanoidRootPart.Position,
-					Vector3.new(0,-5,0)
-				)
-				local part=game.Workspace:FindPartOnRayWithIgnoreList(Raycock,ArsoniaTable.Variables.Functions.GetTrueIgnore())
+				local Raycock=Ray.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position,Vector3.new(0,-5,0))
+				local part=workspace:FindPartOnRayWithIgnoreList(Raycock,ArsoniaTable.Variables.Functions.GetTrueIgnore())
 				if part then
 					for _,v in next, (ArsoniaTable.Variables.Functions.GetPlayers())do
 						if part:IsDescendantOf(v.Character)then
@@ -2246,18 +2221,18 @@ spawn(function()
 			if ArsoniaTable.Visuals.Main.Xray then
 				if game.Workspace:FindFirstChild("Map")then
 					if not(game.ReplicatedStorage.wkspc.Status.RoundOver.Value or game.ReplicatedStorage.wkspc.Status.Preparation.Value)then
-						if not game.Workspace.Map:FindFirstChild("Xcum")then
+						if not game.Workspace.Map:FindFirstChild("Xray")then
 							local a=Instance.new("Folder")
 							a.Parent=game.Workspace.Map
-							a.Name="Xcum"
+							a.Name="Xray"
 							for _,v in next, (game.Workspace.Map:GetDescendants())do
 								if v:IsA("BasePart")then
 									if not v:IsDescendantOf(game.Workspace.Map.Clips)then
-										if not v:FindFirstChild("Transcock")then
+										if not v:FindFirstChild("XrayTransparency")then
 											local a=Instance.new("NumberValue")
 											a.Parent=v
 											a.Value=v.Transparency
-											a.Name="Transcock"
+											a.Name="XrayTransparency"
 										end
 										v.Transparency=v.Transparency+ArsoniaTable.Visuals.Main.XrayTrans
 									end
@@ -2411,10 +2386,10 @@ spawn(function()
 			end
 			if ArsoniaTable.Visuals.Viewmodel.Armchams then
 				if game.Workspace.CurrentCamera:FindFirstChild("Arms")then
-					if not game.Workspace.CurrentCamera.Arms.CSSArms:FindFirstChild("AnalSex")then
+					if not game.Workspace.CurrentCamera.Arms.CSSArms:FindFirstChild("Armchams")then
 						local a=Instance.new("Folder")
 						a.Parent=game.Workspace.CurrentCamera.Arms.CSSArms
-						a.Name="AnalSex"
+						a.Name="Armchams"
 						for _,v in next, (game.Workspace.CurrentCamera.Arms.CSSArms:GetDescendants())do
 							if v:IsA("BasePart")then
 								if v.Transparency~=1 then
@@ -2511,14 +2486,6 @@ mt.__namecall=newcclosure(function(a,b,c,d,e,...)
                         elseif ArsoniaTable.Player.Anti_Aim.TorsoType=="Cam"then
                             c=CFrame.Angles(0,ArsoniaTable.Variables.CamAngles[2],0).LookVector
                         end
-                    end
-                end
-            end
-            if ArsoniaTable.Aimbot.Silentaim.Enabled then
-                if ArsoniaTable.Aimbot.Silentaim.Fakelock then
-                    if ArsoniaTable.Variables.EngluarFix then
-                        b=ArsoniaTable.Variables.EngluarFix.X
-                        c=nil
                     end
                 end
             end
@@ -2698,15 +2665,6 @@ mt.__newindex=newcclosure(function(a,b,c)
             end
         end
     end
-    if ArsoniaTable.Aimbot.Silentaim.Enabled then
-        if ArsoniaTable.Aimbot.Silentaim.Fakelock then
-            if ArsoniaTable.Variables.__SilentAimTarget then
-                if tostring(a)=="Humanoid"and b=="AutoRotate"then
-                    return oldnewIndex(a,b,false)
-                end
-            end
-        end
-    end
     if ArsoniaTable.Visuals.Main.Enabled then
         if ArsoniaTable.Visuals.Main.Anticrouch then
             if tostring(a)=="Humanoid"and b=="CameraOffset"then
@@ -2762,11 +2720,7 @@ coroutine.wrap(function()
                             local start=game.Players.LocalPlayer.Character.HumanoidRootPart.Position+
                             Vector3.new(0,1.5,0)+
                             Vector3.new(0,game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0)
-                            local Raycock=
-                                Ray.new(
-                                    start,
-                                    arget[i].Position-start
-                                )
+                            local Raycock = Ray.new(start,arget[i].Position-start)
                             local part=game.Workspace:FindPartOnRayWithIgnoreList(Raycock,ArsoniaTable.Variables.Functions.GetIgnore())
                             if part==arget[i]or part:IsDescendantOf(arget)then
                                 table.insert(ArsoniaTable.Variables.TargetableParts[v[2]],arget[i])
@@ -2782,11 +2736,7 @@ coroutine.wrap(function()
                                 local start=game.Players.LocalPlayer.Character.HumanoidRootPart.Position+
                                 Vector3.new(0,1.5,0)+
                                 Vector3.new(0,game.Players.LocalPlayer.Character.Humanoid.CameraOffset.Y,0)
-                                local Raycock=
-                                    Ray.new(
-                                        start,
-                                        backtrack.Position-start
-                                    )
+                                local Raycock=Ray.new(start,backtrack.Position-start)
                                 local part=game.Workspace:FindPartOnRayWithIgnoreList(Raycock,ArsoniaTable.Variables.Functions.GetIgnore())
                                 if part==backtrack or part:IsDescendantOf(arget)then
                                     table.insert(ArsoniaTable.Variables.TargetableParts["Backtrack_"..v[2]],backtrack)
